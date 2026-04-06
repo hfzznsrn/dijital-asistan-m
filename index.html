@@ -1,11 +1,508 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dijital Asistan Panelim</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f0f4f8;
+        color: #333;
+        min-height: 100vh;
+      }
+
+      header {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        color: white;
+        padding: 24px 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      }
+
+      header h1 {
+        font-size: 1.6rem;
+        font-weight: 700;
+      }
+
+      #saat {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        font-weight: 500;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 32px auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .kart {
+        background: white;
+        border-radius: 16px;
+        padding: 24px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      }
+
+      .kart h2 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .kart h2 .ikon {
+        font-size: 1.2rem;
+      }
+
+      /* Görevler */
+      #gorevForm {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      #gorevInput {
+        flex: 1;
+        padding: 9px 12px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      #gorevInput:focus {
+        border-color: #4f46e5;
+      }
+
+      .btn-ekle {
+        background: #4f46e5;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 9px 16px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+
+      .btn-ekle:hover {
+        background: #4338ca;
+      }
+
+      #gorevListesi {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 280px;
+        overflow-y: auto;
+      }
+
+      #gorevListesi li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: #f8fafc;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        transition: background 0.15s;
+      }
+
+      #gorevListesi li.tamamlandi span {
+        text-decoration: line-through;
+        color: #94a3b8;
+      }
+
+      #gorevListesi li input[type="checkbox"] {
+        accent-color: #4f46e5;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .sil-btn {
+        margin-left: auto;
+        background: none;
+        border: none;
+        color: #cbd5e1;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: color 0.2s;
+        padding: 2px 4px;
+      }
+
+      .sil-btn:hover {
+        color: #ef4444;
+      }
+
+      /* Ajanda */
+      #ajandaForm {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      #ajandaForm input, #ajandaForm textarea {
+        padding: 9px 12px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      #ajandaForm input:focus, #ajandaForm textarea:focus {
+        border-color: #7c3aed;
+      }
+
+      #ajandaForm textarea {
+        resize: vertical;
+        min-height: 60px;
+      }
+
+      #ajandaListesi {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 260px;
+        overflow-y: auto;
+      }
+
+      #ajandaListesi li {
+        padding: 10px 12px;
+        background: #f8fafc;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        position: relative;
+      }
+
+      #ajandaListesi li .tarih {
+        font-size: 0.78rem;
+        color: #7c3aed;
+        font-weight: 600;
+      }
+
+      #ajandaListesi li .aciklama {
+        color: #475569;
+      }
+
+      #ajandaListesi li .sil-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+
+      /* Hatırlatıcılar */
+      #hatirForm {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+
+      #hatirForm input {
+        padding: 9px 12px;
+        border: 1.5px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      #hatirForm input:focus {
+        border-color: #f59e0b;
+      }
+
+      #hatirListesi {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        max-height: 280px;
+        overflow-y: auto;
+      }
+
+      #hatirListesi li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 12px;
+        background: #fffbeb;
+        border-left: 3px solid #f59e0b;
+        border-radius: 8px;
+        font-size: 0.88rem;
+      }
+
+      #hatirListesi li .zaman {
+        font-size: 0.78rem;
+        color: #f59e0b;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      #hatirListesi li .sil-btn {
+        margin-left: auto;
+        color: #fcd34d;
+      }
+
+      #hatirListesi li .sil-btn:hover {
+        color: #ef4444;
+      }
+
+      .bos-mesaj {
+        text-align: center;
+        color: #cbd5e1;
+        font-size: 0.88rem;
+        padding: 16px 0;
+      }
+    </style>
   </head>
   <body>
-    <h1>Merhaba! Bu benim asistanlık panelim</h1>
-<p>Yakında burada ajandan ve hatırlatıcılarım olacak.</p>
+    <header>
+      <h1>🗂️ Dijital Asistan Panelim</h1>
+      <div id="saat"></div>
+    </header>
+
+    <div class="container">
+
+      <!-- GÖREVLER -->
+      <div class="kart">
+        <h2><span class="ikon">✅</span> Görevler</h2>
+        <div id="gorevForm">
+          <input type="text" id="gorevInput" placeholder="Yeni görev ekle..." />
+          <button class="btn-ekle" onclick="gorevEkle()">Ekle</button>
+        </div>
+        <ul id="gorevListesi">
+          <li class="bos-mesaj" id="gorevBos">Henüz görev yok.</li>
+        </ul>
+      </div>
+
+      <!-- AJANDA -->
+      <div class="kart">
+        <h2><span class="ikon">📅</span> Ajanda</h2>
+        <div id="ajandaForm">
+          <input type="datetime-local" id="ajandaTarih" />
+          <textarea id="ajandaNot" placeholder="Etkinlik veya not..."></textarea>
+          <button class="btn-ekle" style="background:#7c3aed;" onclick="ajandaEkle()">Ekle</button>
+        </div>
+        <ul id="ajandaListesi">
+          <li class="bos-mesaj" id="ajandaBos">Henüz etkinlik yok.</li>
+        </ul>
+      </div>
+
+      <!-- HATIRLATICLAR -->
+      <div class="kart">
+        <h2><span class="ikon">🔔</span> Hatırlatıcılar</h2>
+        <div id="hatirForm">
+          <input type="text" id="hatirMetin" placeholder="Hatırlatıcı metni..." />
+          <input type="datetime-local" id="hatirZaman" />
+          <button class="btn-ekle" style="background:#f59e0b;" onclick="hatirlaticiEkle()">Ekle</button>
+        </div>
+        <ul id="hatirListesi">
+          <li class="bos-mesaj" id="hatirBos">Henüz hatırlatıcı yok.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <script>
+      // Saat güncelle
+      function saatiGuncelle() {
+        const now = new Date();
+        document.getElementById('saat').textContent =
+          now.toLocaleDateString('tr-TR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) +
+          '  •  ' +
+          now.toLocaleTimeString('tr-TR');
+      }
+      saatiGuncelle();
+      setInterval(saatiGuncelle, 1000);
+
+      // Veriyi localStorage'dan yükle
+      let gorevler = JSON.parse(localStorage.getItem('gorevler') || '[]');
+      let ajandalar = JSON.parse(localStorage.getItem('ajandalar') || '[]');
+      let hatirlaticlar = JSON.parse(localStorage.getItem('hatirlaticlar') || '[]');
+
+      function kaydet() {
+        localStorage.setItem('gorevler', JSON.stringify(gorevler));
+        localStorage.setItem('ajandalar', JSON.stringify(ajandalar));
+        localStorage.setItem('hatirlaticlar', JSON.stringify(hatirlaticlar));
+      }
+
+      // ---- GÖREVLER ----
+      function gorevListesiGoster() {
+        const ul = document.getElementById('gorevListesi');
+        const bos = document.getElementById('gorevBos');
+        ul.innerHTML = '';
+        if (gorevler.length === 0) {
+          ul.innerHTML = '<li class="bos-mesaj">Henüz görev yok.</li>';
+          return;
+        }
+        gorevler.forEach((g, i) => {
+          const li = document.createElement('li');
+          if (g.tamamlandi) li.classList.add('tamamlandi');
+          li.innerHTML = `
+            <input type="checkbox" ${g.tamamlandi ? 'checked' : ''} onchange="gorevToggle(${i})" />
+            <span>${g.metin}</span>
+            <button class="sil-btn" onclick="gorevSil(${i})">✕</button>
+          `;
+          ul.appendChild(li);
+        });
+      }
+
+      function gorevEkle() {
+        const inp = document.getElementById('gorevInput');
+        const metin = inp.value.trim();
+        if (!metin) return;
+        gorevler.push({ metin, tamamlandi: false });
+        kaydet();
+        gorevListesiGoster();
+        inp.value = '';
+      }
+
+      function gorevToggle(i) {
+        gorevler[i].tamamlandi = !gorevler[i].tamamlandi;
+        kaydet();
+        gorevListesiGoster();
+      }
+
+      function gorevSil(i) {
+        gorevler.splice(i, 1);
+        kaydet();
+        gorevListesiGoster();
+      }
+
+      document.getElementById('gorevInput').addEventListener('keydown', e => {
+        if (e.key === 'Enter') gorevEkle();
+      });
+
+      // ---- AJANDA ----
+      function ajandaListesiGoster() {
+        const ul = document.getElementById('ajandaListesi');
+        ul.innerHTML = '';
+        if (ajandalar.length === 0) {
+          ul.innerHTML = '<li class="bos-mesaj">Henüz etkinlik yok.</li>';
+          return;
+        }
+        const sirali = [...ajandalar].sort((a, b) => new Date(a.tarih) - new Date(b.tarih));
+        sirali.forEach((a, i) => {
+          const tarihGoster = new Date(a.tarih).toLocaleString('tr-TR', {
+            day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit'
+          });
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span class="tarih">📅 ${tarihGoster}</span>
+            <span class="aciklama">${a.not}</span>
+            <button class="sil-btn" onclick="ajandaSil(${ajandalar.indexOf(a)})">✕</button>
+          `;
+          ul.appendChild(li);
+        });
+      }
+
+      function ajandaEkle() {
+        const tarih = document.getElementById('ajandaTarih').value;
+        const not = document.getElementById('ajandaNot').value.trim();
+        if (!tarih || !not) return;
+        ajandalar.push({ tarih, not });
+        kaydet();
+        ajandaListesiGoster();
+        document.getElementById('ajandaTarih').value = '';
+        document.getElementById('ajandaNot').value = '';
+      }
+
+      function ajandaSil(i) {
+        ajandalar.splice(i, 1);
+        kaydet();
+        ajandaListesiGoster();
+      }
+
+      // ---- HATIRLATICLAR ----
+      function hatirListesiGoster() {
+        const ul = document.getElementById('hatirListesi');
+        ul.innerHTML = '';
+        if (hatirlaticlar.length === 0) {
+          ul.innerHTML = '<li class="bos-mesaj">Henüz hatırlatıcı yok.</li>';
+          return;
+        }
+        const sirali = [...hatirlaticlar].sort((a, b) => new Date(a.zaman) - new Date(b.zaman));
+        sirali.forEach((h, i) => {
+          const zamanGoster = new Date(h.zaman).toLocaleString('tr-TR', {
+            day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit'
+          });
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <span>🔔 ${h.metin}</span>
+            <span class="zaman">${zamanGoster}</span>
+            <button class="sil-btn" onclick="hatirSil(${hatirlaticlar.indexOf(h)})">✕</button>
+          `;
+          ul.appendChild(li);
+        });
+      }
+
+      function hatirlaticiEkle() {
+        const metin = document.getElementById('hatirMetin').value.trim();
+        const zaman = document.getElementById('hatirZaman').value;
+        if (!metin || !zaman) return;
+        hatirlaticlar.push({ metin, zaman });
+        kaydet();
+        hatirListesiGoster();
+        document.getElementById('hatirMetin').value = '';
+        document.getElementById('hatirZaman').value = '';
+      }
+
+      function hatirSil(i) {
+        hatirlaticlar.splice(i, 1);
+        kaydet();
+        hatirListesiGoster();
+      }
+
+      // Hatırlatıcı bildirimleri kontrol et
+      function hatirlaticiKontrol() {
+        const simdi = new Date();
+        hatirlaticlar.forEach((h, i) => {
+          const zaman = new Date(h.zaman);
+          const fark = Math.abs(simdi - zaman) / 1000;
+          if (fark < 30 && !h.bildirimGonderildi) {
+            alert('🔔 Hatırlatıcı: ' + h.metin);
+            hatirlaticlar[i].bildirimGonderildi = true;
+            kaydet();
+          }
+        });
+      }
+      setInterval(hatirlaticiKontrol, 20000);
+
+      // İlk yükleme
+      gorevListesiGoster();
+      ajandaListesiGoster();
+      hatirListesiGoster();
+    </script>
   </body>
 </html>
