@@ -1,36 +1,76 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,nasılsın initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dijital Asistan Panelim</title>
     <style>
-        body{background:#fff0f5;font-family:sans-serif;}
-        textarea{width;100%;border-radius;10px;}
+        body { background: #fff0f5; font-family: sans-serif; padding: 20px; }
+        textarea { width: 100%; border-radius: 10px; padding: 10px; border: 1px solid #d63384; box-sizing: border-box; }
+        .kaydet-btn {
+            width: 100%; 
+            background-color: pink; 
+            color: black; 
+            border: 2px solid #d63384; 
+            padding: 10px; 
+            border-radius: 10px; 
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
     </style>
 </head>
-
 <body>
-    
-    <h1 style="text-align:center;">Dijital Asistan Panelim</h1>
-    <p>Dijital Asistan Panelim yükleniyor...</p>
-    <h3>Günlük notum</h3>
-    <textarea rows="4" cols="30">Günlük Ajandam</textarea>
-    <hr>
-    <h3>Hızlı Hatırlatıcı</h3>
-<ul>
-    <li><input type="checkbox">Randevuları kontrol et</li>
-     <li><input type="checkbox">Toplantıları kontrol et</li
- </ul>
-    <br>
-    <button onclick="kaydet()"
-        style="width;100%;
-        background-color:pink; color:black;
-        border;2px solid #d63384; padding:10px;" border-radius:10px;">
-        Değişiklikleri Kaydet
-      </button>
-    <p style="text-align: center;color:#d63384;">Asistan Paneli Hazır</p>
-</body>
 
+    <h1 style="text-align:center;">Dijital Asistan Panelim</h1>
+    <p style="text-align:center;">Dijital Asistan Panelim yükleniyor...</p>
+    
+    <h3>Günlük Notum</h3>
+    <textarea id="gunlukNot" rows="4" placeholder="Günlük Ajandam"></textarea>
+    
+    <hr>
+    
+    <h3>Hızlı Hatırlatıcı</h3>
+    <ul>
+        <li><input type="checkbox" id="check1"> Randevuları kontrol et</li>
+        <li><input type="checkbox" id="check2"> Toplantıları kontrol et</li>
+    </ul>
+
+    <button class="kaydet-btn" onclick="kaydet()">Değişiklikleri Kaydet</button>
+    
+    <p id="mesaj" style="text-align: center; color: #d63384;"></p>
+
+    <script>
+        // Sayfa her açıldığında kayıtlı notu geri getirir
+        window.onload = function() {
+            const eskiNot = localStorage.getItem('asistanNotu');
+            const c1 = localStorage.getItem('c1');
+            const c2 = localStorage.getItem('c2');
+
+            if (eskiNot) document.getElementById('gunlukNot').value = eskiNot;
+            if (c1 === 'true') document.getElementById('check1').checked = true;
+            if (c2 === 'true') document.getElementById('check2').checked = true;
+            
+            document.getElementById('mesaj').innerText = "Asistan Paneli Hazır";
+        };
+
+        // Butona basınca her şeyi hafızaya yazar
+        function kaydet() {
+            const not = document.getElementById('gunlukNot').value;
+            const c1 = document.getElementById('check1').checked;
+            const c2 = document.getElementById('check2').checked;
+
+            localStorage.setItem('asistanNotu', not);
+            localStorage.setItem('c1', c1);
+            localStorage.setItem('c2', c2);
+
+            document.getElementById('mesaj').innerText = "Notların ve seçimlerin kaydedildi!";
+            
+            setTimeout(() => {
+                document.getElementById('mesaj').innerText = "Asistan Paneli Hazır";
+            }, 2000);
+        }
+    </script>
+
+</body>
 </html>
