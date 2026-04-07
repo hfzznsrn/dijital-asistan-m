@@ -3,74 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dijital Asistan Panelim</title>
+    <title>Dijital Asistan Randevu Paneli</title>
     <style>
-        body { background: #fff0f5; font-family: sans-serif; padding: 20px; }
-        textarea { width: 100%; border-radius: 10px; padding: 10px; border: 1px solid #d63384; box-sizing: border-box; }
-        .kaydet-btn {
+        body { background: #fff0f5; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; }
+        .panel-konteynir { max-width: 700px; margin: 0 auto; background: white; padding: 25px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border: 1px solid #ffb6c1; }
+        h1 { text-align: center; color: #d63384; margin-bottom: 30px; }
+        h3 { color: #d63384; border-bottom: 2px solid pink; display: inline-block; padding-bottom: 5px; }
+        
+        .randevu-basliklar { display: flex; font-weight: bold; margin-bottom: 10px; color: #555; font-size: 14px; }
+        .randevu-satir { display: flex; gap: 10px; margin-bottom: 12px; }
+        
+        input, textarea { border: 1px solid #ffd1dc; border-radius: 8px; padding: 10px; outline: none; transition: 0.3s; }
+        input:focus, textarea:focus { border-color: #d63384; box-shadow: 0 0 5px rgba(214, 51, 132, 0.2); }
+        
+        .saat { width: 70px; text-align: center; }
+        .kisi { width: 150px; }
+        .konu { flex-grow: 1; }
+        
+        textarea { width: 100%; box-sizing: border-box; margin-top: 10px; font-family: inherit; }
+        
+        .kaydet-butonu {
             width: 100%; 
-            background-color: pink; 
-            color: black; 
-            border: 2px solid #d63384; 
-            padding: 10px; 
-            border-radius: 10px; 
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
+            background: #d63384; 
+            color: white; 
+            border: none; 
+            padding: 15px; 
+            border-radius: 12px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(214, 51, 132, 0.3);
         }
+        .kaydet-butonu:active { transform: scale(0.98); }
+        .durum { text-align: center; color: #d63384; font-size: 14px; margin-top: 10px; height: 20px; }
     </style>
 </head>
 <body>
 
-    <h1 style="text-align:center;">Dijital Asistan Panelim</h1>
-    <p style="text-align:center;">Dijital Asistan Panelim yükleniyor...</p>
-    
-    <h3>Günlük Notum</h3>
-    <textarea id="gunlukNot" rows="4" placeholder="Günlük Ajandam"></textarea>
-    
-    <hr>
-    
-    <h3>Hızlı Hatırlatıcı</h3>
-    <ul>
-        <li><input type="checkbox" id="check1"> Randevuları kontrol et</li>
-        <li><input type="checkbox" id="check2"> Toplantıları kontrol et</li>
-    </ul>
+<div class="panel-konteynir">
+    <h1>🌸 Günlük Randevu Planım</h1>
 
-    <button class="kaydet-btn" onclick="kaydet()">Değişiklikleri Kaydet</button>
-    
-    <p id="mesaj" style="text-align: center; color: #d63384;"></p>
+    <div class="randevu-bolumu">
+        <h3>🗓️ Bugünkü Randevular</h3>
+        <div class="randevu-basliklar">
+            <div style="width: 70px;">Saat</div>
+            <div style="width: 150px; margin-left: 10px;">Kişi</div>
+            <div style="flex-grow: 1; margin-left: 10px;">Görüşme Konusu</div>
+        </div>
 
-    <script>
-        // Sayfa her açıldığında kayıtlı notu geri getirir
-        window.onload = function() {
-            const eskiNot = localStorage.getItem('asistanNotu');
-            const c1 = localStorage.getItem('c1');
-            const c2 = localStorage.getItem('c2');
+        <div class="randevu-satir">
+            <input type="text" class="saat" id="s1" placeholder="09:00">
+            <input type="text" class="kisi" id="k1" placeholder="Kimle?">
+            <input type="text" class="konu" id="kn1" placeholder="Ne hakkında?">
+        </div>
+        <div class="randevu-satir">
+            <input type="text" class="saat" id="s2" placeholder="11:30">
+            <input type="text" class="kisi" id="k2" placeholder="Kimle?">
+            <input type="text" class="konu" id="kn2" placeholder="Ne hakkında?">
+        </div>
+        <div class="randevu-satir">
+            <input type="text" class="saat" id="s3" placeholder="14:00">
+            <input type="text" class="kisi" id="k3" placeholder="Kimle?">
+            <input type="text" class="konu" id="kn3" placeholder="Ne hakkında?">
+        </div>
+    </div>
 
-            if (eskiNot) document.getElementById('gunlukNot').value = eskiNot;
-            if (c1 === 'true') document.getElementById('check1').checked = true;
-            if (c2 === 'true') document.getElementById('check2').checked = true;
-            
-            document.getElementById('mesaj').innerText = "Asistan Paneli Hazır";
-        };
-
-        // Butona basınca her şeyi hafızaya yazar
-        function kaydet() {
-            const not = document.getElementById('gunlukNot').value;
-            const c1 = document.getElementById('check1').checked;
-            const c2 = document.getElementById('check2').checked;
-
-            localStorage.setItem('asistanNotu', not);
-            localStorage.setItem('c1', c1);
-            localStorage.setItem('c2', c2);
-
-            document.getElementById('mesaj').innerText = "Notların ve seçimlerin kaydedildi!";
-            
-            setTimeout(() => {
-                document.getElementById('mesaj').innerText = "Asistan Paneli Hazır";
-            }, 2000);
-        }
-    </script>
-
-</body>
-</html>
+    <div style="margin-top: 30px;">
+        <h3>📝 Genel Notlar</h3>
+        <textarea id="genelNotlar" rows="4" placeholder="Eklemek istediğin diğer notlar..."></textarea>
+    </div>
+!I
