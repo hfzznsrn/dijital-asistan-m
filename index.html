@@ -3,67 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesyonel Asistan Paneli</title>
+    <title>Gelişmiş Asistan Paneli</title>
     <style>
-        body { background: #0a192f; font-family: 'Segoe UI', sans-serif; color: #e6f1ff; padding: 20px; }
-        .container { max-width: 800px; margin: 0 auto; background: #112240; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { text-align: center; color: #64ffda; border-bottom: 2px solid #233554; padding-bottom: 10px; }
-        h3 { color: #64ffda; margin-top: 25px; display: flex; align-items: center; gap: 10px; }
+        body { background: #001f3f; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .main-panel { background: #ffffff; width: 100%; max-width: 800px; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        h1 { text-align: center; color: #001f3f; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: #d63384; margin-top: 20px; border-left: 4px solid #d63384; padding-left: 10px; }
         
-        input, textarea { 
-            width: 100%; background: #233554; border: 1px solid #303C55; border-radius: 8px; 
-            padding: 12px; color: white; margin-bottom: 10px; box-sizing: border-box; outline: none;
-        }
-        input:focus { border-color: #64ffda; }
+        input, textarea { width: 100%; background: #fcfcfc; border: 1px solid #ccc; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+        input:focus, textarea:focus { border-color: #001f3f; }
+
+        .btn { width: 100%; background: #001f3f; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-bottom: 10px; transition: 0.3s; }
+        .btn:hover { background: #003366; }
         
-        .row { display: flex; gap: 10px; margin-bottom: 5px; }
-        .time { width: 120px; }
-        
-        .btn {
-            width: 100%; background: transparent; border: 2px solid #64ffda; color: #64ffda;
-            padding: 15px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 16px;
-            transition: 0.3s; margin-top: 20px;
-        }
-        .btn:hover { background: rgba(100, 255, 218, 0.1); }
-        
-        .alarm-section { background: #1d2d50; padding: 15px; border-radius: 10px; border-left: 4px solid #64ffda; }
+        .complete-btn { background: #28a745; margin-top: -5px; margin-bottom: 20px; font-size: 13px; padding: 10px; }
+        .complete-btn:hover { background: #218838; }
+
+        /* Tamamlananlar Kutusu */
+        .archive-box { background: #f8f9fa; border: 1px dashed #ccc; padding: 15px; border-radius: 10px; max-height: 200px; overflow-y: auto; color: #666; font-size: 14px; }
+        .archive-item { border-bottom: 1px dotted #ddd; padding: 5px 0; display: flex; justify-content: space-between; }
+        .clear-btn { color: red; cursor: pointer; font-size: 12px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>💼 Asistan Yönetim Paneli</h1>
+<div class="main-panel">
+    <h1>💼 Profesyonel Asistanım</h1>
 
-    <div class="alarm-section">
-        <h3>🔔 Toplantı Alarmı & Hatırlatıcı</h3>
-        <p style="font-size: 12px; color: #8892b0;">Toplantı saati gelince tarayıcı size bildirim gönderecektir.</p>
-        <div class="row">
-            <input type="time" id="alarmTime" class="time">
-            <input type="text" id="alarmDesc" placeholder="Toplantı Konusu...">
-        </div>
-        <button class="btn" onclick="askPermission()" style="padding: 8px; font-size: 12px;">Bildirim İzni Ver</button>
+    <h3>🔔 Toplantı & Alarm</h3>
+    <div style="display: flex; gap: 10px;">
+        <input type="time" id="alarmTime" style="width: 120px;">
+        <input type="text" id="alarmDesc" placeholder="Toplantı konusu...">
     </div>
 
-    <h3>📅 Günlük Planlarım</h3>
-    <textarea id="dailyPlan" rows="4" placeholder="Bugün yapılacaklar..."></textarea>
+    <h3>📝 Günlük Plan (Aktif)</h3>
+    <textarea id="dailyPlan" rows="3" placeholder="Şu an üzerinde çalıştığın iş..."></textarea>
+    <button class="btn complete-btn" onclick="finishTask()">✔️ Bu İşi Tamamla ve Arşive Gönder</button>
 
-    <h3>🗓️ Haftalık Planlarım</h3>
-    <textarea id="weeklyPlan" rows="4" placeholder="Bu hafta öncelikli olanlar..."></textarea>
+    <h3>🗓️ Haftalık Planlar</h3>
+    <textarea id="weeklyPlan" rows="3" placeholder="Haftalık hedeflerin..."></textarea>
 
-    <button class="btn" onclick="saveAll()">Her Şeyi Kaydet ve Aktif Et</button>
-    <p id="status" style="text-align:center; color: #8892b0; margin-top:10px;"></p>
+    <h3>✅ Tamamlanan Geçmiş Notlar</h3>
+    <div id="archiveContainer" class="archive-box">
+        </div>
+    <div onclick="clearArchive()" class="clear-btn" style="text-align: right; margin-top: 5px;">Geçmişi Temizle</div>
+
+    <button class="btn" style="margin-top: 30px;" onclick="saveAll()">💾 Tüm Ayarları Kaydet</button>
 </div>
 
 <script>
-    // Sayfa açıldığında verileri yükle
     window.onload = function() {
         document.getElementById('dailyPlan').value = localStorage.getItem('daily') || "";
         document.getElementById('weeklyPlan').value = localStorage.getItem('weekly') || "";
         document.getElementById('alarmTime').value = localStorage.getItem('aTime') || "";
         document.getElementById('alarmDesc').value = localStorage.getItem('aDesc') || "";
+        loadArchive();
         
-        // Arka planda saati kontrol etmeye başla
-        setInterval(checkAlarm, 10000); // Her 10 saniyede bir kontrol eder
+        setInterval(checkAlarm, 30000);
     };
 
     function saveAll() {
@@ -71,34 +67,23 @@
         localStorage.setItem('weekly', document.getElementById('weeklyPlan').value);
         localStorage.setItem('aTime', document.getElementById('alarmTime').value);
         localStorage.setItem('aDesc', document.getElementById('alarmDesc').value);
+        alert("Kaydedildi!");
+    }
+
+    // İşi Tamamlananlara Gönder
+    function finishTask() {
+        const task = document.getElementById('dailyPlan').value;
+        if (!task) return;
+
+        let archive = JSON.parse(localStorage.getItem('myArchive') || "[]");
+        const date = new Date().toLocaleDateString('tr-TR');
+        archive.unshift({ text: task, date: date }); // Yeni tamamlananı başa ekle
         
-        document.getElementById('status').innerText = "Tüm veriler kaydedildi!";
-        setTimeout(() => { document.getElementById('status').innerText = ""; }, 3000);
+        localStorage.setItem('myArchive', JSON.stringify(archive));
+        document.getElementById('dailyPlan').value = ""; // Günlük kutusunu temizle
+        localStorage.setItem('daily', ""); // Hafızadaki günlüğü de sil
+        
+        loadArchive();
     }
 
-    // Bildirim İzni İsteme
-    function askPermission() {
-        Notification.requestPermission().then(perm => {
-            if(perm === "granted") alert("Bildirim izni verildi!");
-        });
-    }
-
-    // Alarm Kontrolü
-    function checkAlarm() {
-        const now = new Date();
-        const currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
-        const setTime = document.getElementById('alarmTime').value;
-        const desc = document.getElementById('alarmDesc').value;
-
-        if (currentTime === setTime) {
-            if (Notification.permission === "granted") {
-                new Notification("Toplantı Vakti!", { body: desc });
-            } else {
-                alert("TOPLANTI VAKTİ: " + desc);
-            }
-        }
-    }
-</script>
-
-</body>
-</html>
+    // Arşivi Ekrana Yaz
