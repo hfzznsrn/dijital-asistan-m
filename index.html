@@ -3,87 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelişmiş Asistan Paneli</title>
+    <title>Gelişmiş Asistan Paneli v2</title>
     <style>
-        body { background: #001f3f; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; }
-        .main-panel { background: #ffffff; width: 100%; max-width: 800px; padding: 30px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-        h1 { text-align: center; color: #001f3f; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        h3 { color: #d63384; margin-top: 20px; border-left: 4px solid #d63384; padding-left: 10px; }
+        body { background: #001f3f; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 20px; margin: 0; color: #333; }
+        .main-panel { background: #ffffff; width: 100%; max-width: 900px; padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); min-height: 80vh; }
         
-        input, textarea { width: 100%; background: #fcfcfc; border: 1px solid #ccc; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
-        input:focus, textarea:focus { border-color: #001f3f; }
-
-        .btn { width: 100%; background: #001f3f; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-bottom: 10px; transition: 0.3s; }
-        .btn:hover { background: #003366; }
+        h1 { text-align: center; color: #001f3f; margin-bottom: 20px; font-size: 24px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
         
-        .complete-btn { background: #28a745; margin-top: -5px; margin-bottom: 20px; font-size: 13px; padding: 10px; }
-        .complete-btn:hover { background: #218838; }
+        /* Sekme Sistemi (Tabs) */
+        .tab-menu { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: center; }
+        .tab-btn { background: #e0e0e0; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .tab-btn.active { background: #001f3f; color: white; }
 
-        /* Tamamlananlar Kutusu */
-        .archive-box { background: #f8f9fa; border: 1px dashed #ccc; padding: 15px; border-radius: 10px; max-height: 200px; overflow-y: auto; color: #666; font-size: 14px; }
-        .archive-item { border-bottom: 1px dotted #ddd; padding: 5px 0; display: flex; justify-content: space-between; }
-        .clear-btn { color: red; cursor: pointer; font-size: 12px; font-weight: bold; }
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Form Elemanları */
+        h3 { color: #d63384; font-size: 16px; margin-top: 15px; display: flex; align-items: center; gap: 8px; }
+        input, textarea { width: 100%; background: #f9f9f9; border: 1px solid #ccc; border-radius: 10px; padding: 12px; margin-bottom: 10px; box-sizing: border-box; outline: none; }
+        
+        .row { display: flex; gap: 10px; margin-bottom: 10px; }
+        .btn-main { width: 100%; background: #001f3f; color: white; border: none; padding: 15px; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px; }
+        .btn-save { background: #28a745; }
+
+        /* Arşiv Bölümü */
+        .archive-list { background: #f1f1f1; padding: 15px; border-radius: 10px; max-height: 300px; overflow-y: auto; }
+        .archive-item { background: white; padding: 10px; margin-bottom: 8px; border-radius: 5px; border-left: 4px solid #d63384; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="main-panel">
-    <h1>💼 Profesyonel Asistanım</h1>
+    <h1>💼 Profesyonel Yönetim Paneli</h1>
 
-    <h3>🔔 Toplantı & Alarm</h3>
-    <div style="display: flex; gap: 10px;">
-        <input type="time" id="alarmTime" style="width: 120px;">
-        <input type="text" id="alarmDesc" placeholder="Toplantı konusu...">
+    <div class="tab-menu">
+        <button class="tab-btn active" onclick="openTab(event, 'tab-ana')">🏠 Ana Ekran</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-planlar')">🗓️ Planlar (G/H/A)</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-toplanti')">🤝 Toplantı & Randevu</button>
+        <button class="tab-btn" onclick="openTab(event, 'tab-arsiv')">✅ Tamamlananlar</button>
     </div>
 
-    <h3>📝 Günlük Plan (Aktif)</h3>
-    <textarea id="dailyPlan" rows="3" placeholder="Şu an üzerinde çalıştığın iş..."></textarea>
-    <button class="btn complete-btn" onclick="finishTask()">✔️ Bu İşi Tamamla ve Arşive Gönder</button>
-
-    <h3>🗓️ Haftalık Planlar</h3>
-    <textarea id="weeklyPlan" rows="3" placeholder="Haftalık hedeflerin..."></textarea>
-
-    <h3>✅ Tamamlanan Geçmiş Notlar</h3>
-    <div id="archiveContainer" class="archive-box">
+    <div id="tab-ana" class="tab-content active">
+        <h3>🔔 Bildirim & Alarm Sistemi</h3>
+        <p style="font-size: 12px; color: #666;">Not: Bildirim gelmesi için aşağıdaki butona basıp "İzin Ver" demelisiniz.</p>
+        <button class="tab-btn" style="background: #ffc107; margin-bottom: 10px;" onclick="requestPermission()">📢 Bildirim İznini Aktif Et</button>
+        
+        <div class="row">
+            <input type="time" id="alarmTime" style="width: 150px;">
+            <input type="text" id="alarmDesc" placeholder="Hatırlatılacak konu...">
         </div>
-    <div onclick="clearArchive()" class="clear-btn" style="text-align: right; margin-top: 5px;">Geçmişi Temizle</div>
+        
+        <h3>📝 Hızlı Not (Günlük Aktif)</h3>
+        <textarea id="dailyActive" rows="5" placeholder="Şu an üzerinde çalıştığın iş..."></textarea>
+        <button class="btn-main btn-save" onclick="moveToArchive()">✔️ İşi Bitir ve Arşive Gönder</button>
+    </div>
 
-    <button class="btn" style="margin-top: 30px;" onclick="saveAll()">💾 Tüm Ayarları Kaydet</button>
+    <div id="tab-planlar" class="tab-content">
+        <h3>📅 Günlük Plan</h3>
+        <textarea id="planDaily" rows="3"></textarea>
+        <h3>🗓️ Haftalık Plan</h3>
+        <textarea id="planWeekly" rows="3"></textarea>
+        <h3>🌑 Aylık Plan</h3>
+        <textarea id="planMonthly" rows="3"></textarea>
+    </div>
+
+    <div id="tab-toplanti" class="tab-content">
+        <h3>🤝 Toplantılar</h3>
+        <textarea id="meetingNotes" rows="4" placeholder="Toplantı saatleri ve detayları..."></textarea>
+        <h3>📌 Randevular</h3>
+        <textarea id="appointmentNotes" rows="4" placeholder="Randevu listesi..."></textarea>
+    </div>
+
+    <div id="tab-arsiv" class="tab-content">
+        <h3>✅ Tamamlanan İş Geçmişi</h3>
+        <div id="archiveList" class="archive-list">
+            </div>
+        <p onclick="clearArchive()" style="color: red; cursor: pointer; text-align: right; font-size: 12px; margin-top: 10px;">🗑️ Arşivi Temizle</p>
+    </div>
+
+    <button class="btn-main" onclick="saveAllData()">💾 Tüm Değişiklikleri Kaydet</button>
+    <p id="statusMsg" style="text-align:center; color: green; font-weight: bold;"></p>
 </div>
 
 <script>
+    // Sekme Değiştirme Fonksiyonu
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    // Verileri Kaydetme
+    function saveAllData() {
+        const data = {
+            alarmTime: document.getElementById('alarmTime').value,
+            alarmDesc: document.getElementById('alarmDesc').value,
+            dailyActive: document.getElementById('dailyActive').value,
+            planDaily: document.getElementById('planDaily').value,
+            planWeekly: document.getElementById('planWeekly').value,
+            planMonthly: document.getElementById('planMonthly').value,
+            meetingNotes: document.getElementById('meetingNotes').value,
+            appointmentNotes: document.getElementById('appointmentNotes').value
+        };
+        
+        for (let key in data) { localStorage.setItem(key, data[key]); }
+        
+        document.getElementById('statusMsg').innerText = "Başarıyla Kaydedildi!";
+        setTimeout(() => { document.getElementById('statusMsg').innerText = ""; }, 2000);
+    }
+
+    // Verileri Yükleme
     window.onload = function() {
-        document.getElementById('dailyPlan').value = localStorage.getItem('daily') || "";
-        document.getElementById('weeklyPlan').value = localStorage.getItem('weekly') || "";
-        document.getElementById('alarmTime').value = localStorage.getItem('aTime') || "";
-        document.getElementById('alarmDesc').value = localStorage.getItem('aDesc') || "";
+        document.getElementById('alarmTime').value = localStorage.getItem('alarmTime') || "";
+        document.getElementById('alarmDesc').value = localStorage.getItem('alarmDesc') || "";
+        document.getElementById('dailyActive').value = localStorage.getItem('dailyActive') || "";
+        document.getElementById('planDaily').value = localStorage.getItem('planDaily') || "";
+        document.getElementById('planWeekly').value = localStorage.getItem('planWeekly') || "";
+        document.getElementById('planMonthly').value = localStorage.getItem('planMonthly') || "";
+        document.getElementById('meetingNotes').value = localStorage.getItem('meetingNotes') || "";
+        document.getElementById('appointmentNotes').value = localStorage.getItem('appointmentNotes') || "";
         loadArchive();
         
+        // Alarm Kontrolü (Dakikada bir)
         setInterval(checkAlarm, 30000);
     };
 
-    function saveAll() {
-        localStorage.setItem('daily', document.getElementById('dailyPlan').value);
-        localStorage.setItem('weekly', document.getElementById('weeklyPlan').value);
-        localStorage.setItem('aTime', document.getElementById('alarmTime').value);
-        localStorage.setItem('aDesc', document.getElementById('alarmDesc').value);
-        alert("Kaydedildi!");
-    }
-
-    // İşi Tamamlananlara Gönder
-    function finishTask() {
-        const task = document.getElementById('dailyPlan').value;
-        if (!task) return;
-
-        let archive = JSON.parse(localStorage.getItem('myArchive') || "[]");
-        const date = new Date().toLocaleDateString('tr-TR');
-        archive.unshift({ text: task, date: date }); // Yeni tamamlananı başa ekle
+    // Arşive Gönderme
+    function moveToArchive() {
+        const note = document.getElementById('dailyActive').value;
+        if(!note) return;
         
-        localStorage.setItem('myArchive', JSON.stringify(archive));
-        document.getElementById('dailyPlan').value = ""; // Günlük kutusunu temizle
-        localStorage.setItem('daily', ""); // Hafızadaki günlüğü de sil
+        let archive = JSON.parse(localStorage.getItem('myFullArchive') || "[]");
+        archive.unshift({ text: note, date: new Date().toLocaleString('tr-TR') });
+        localStorage.setItem('myFullArchive', JSON.stringify(archive));
         
+        document.getElementById('dailyActive').value = "";
+        saveAllData();
         loadArchive();
+        alert("İş arşive gönderildi!");
     }
 
-    // Arşivi Ekrana Yaz
+    function loadArchive() {
+        const archive = JSON.parse(localStorage.getItem('myFullArchive') || "[]");
+        const list = document.getElementById('archiveList');
+        list.innerHTML = archive.map(item => `
+            <div class="archive-item">
+                <strong>${item.date}</strong><br>${item.text}
+            </div>
+        `).join('');
+    }
+
+    // BİLDİRİM VE ALARM
+    function requestPermission() {
+        Notification.requestPermission().then(permission => {
+            if (permission === "granted") alert("Bildirimler açıldı! Artık alarm çalabilir.");
+        });
+    }
+
+    function checkAlarm() {
+        const now = new Date();
+        const currentTime = now.getHours().toString().padStart(2, '0') + ":" + now.getMinutes().toString().padStart(2, '0');
+        const alarmTime = document.getElementById('alarmTime').value;
+        
+        if(currentTime === alarmTime && alarmTime !== "") {
+            if(Notification.permission === "granted") {
+                new Notification("⏰ TOPLANTI VAKTİ!", { body: document.getElementById('alarmDesc').value });
+            } else {
+                alert("ALARM: " + document.getElementById('alarmDesc').value);
+            }
+        }
+    }
+
+    function clearArchive() {
+        if(confirm("Tüm geçmiş silinsin mi?")) {
+            localStorage.removeItem('myFullArchive');
+            loadArchive();
+        }
+    }
+</script>
+
+</body>
+</html>
+
