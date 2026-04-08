@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html lang="tr">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,nasılsın initial-scale=1.0">
-    <title>Dijital Asistan Panelim</title>
-    <style>
-        body{background:#001f3f; display: flex;
-             justify-content:center;
-             padding:20px; font-family:sans-serif;}
-        .panel{
-            background-color:white;
-            width:100%;
-            max-width:500px;
-            padding:20px;
-            border-radius:20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
-        }
-        textarea {width: 100%;
-                  border-radius:10px; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TGS Dijital Asistanım</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div class="panel">
-    <h1 style="text-align:center;">Dijital Asistan Panelim</h1>
-    <p>Dijital Asistan Panelim yükleniyor...</p>
-    <h3>Günlük notum</h3>
-    <textarea rows="4" cols="30">Günlük Ajandam</textarea>
-    <hr>
-    <h3>Hızlı Hatırlatıcı</h3>
-<ul>
-    <li><input type="checkbox">Randevuları kontrol et</li>
-     <li><input type="checkbox">Toplantıları kontrol et</li
- </ul>
-    <br>
-    <button onclick="kaydet()"
-        style="width;100%;
-        background-color:pink; color:black;
-        border;2px solid #d63384; padding:10px;" border-radius:10px;">
-        Değişiklikleri Kaydet
-      </button>
-    <p style="text-align: center;color:#d63384;">Asistan Paneli Hazır</p>
-</body>
 
+    <div class="menu-cubugu">
+        <h2>Asistan</h2>
+        <button onclick="sayfaAc('gunluk')">Günlük Notlarım</button>
+        <button onclick="sayfaAc('haftalik')">Haftalık Planlayıcı</button>
+        <button onclick="sayfaAc('aylik')">Aylık Planlayıcı</button>
+        <button onclick="sayfaAc('toplanti')">Toplantılar</button>
+        <button onclick="sayfaAc('randevu')">Randevular</button>
+    </div>
+
+    <div class="icerik-alani">
+        <div id="gunluk" class="sayfa-icerik">
+            <h1>Günlük Notlarım</h1>
+            [span_3](start_span)<p>Taslağındaki günlük notlar sayfası burası olacak.</p>[span_3](end_span)
+        </div>
+
+        <div id="haftalik" class="sayfa-icerik" style="display:none;">
+            <h1>Haftalık Planlayıcı</h1>
+            [span_4](start_span)<p>Gün gün ayrılmış tablo buraya gelecek.</p>[span_4](end_span)
+        </div>
+        
+        </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
