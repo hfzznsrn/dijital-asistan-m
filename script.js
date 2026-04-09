@@ -9,6 +9,9 @@ function sayfaAc(sayfaId) {
 
 // 2. Not ekleme fonksiyonu
 function notEkle() {
+    // BURAYA EKLEDİK: Test için uyarı kutusu
+    alert("Butona basıldı, fonksiyon çalışıyor!"); 
+
     var notMetni = document.getElementById("not-alani").value;
     if (notMetni === "") return;
 
@@ -26,19 +29,4 @@ function notEkle() {
     document.getElementById("not-alani").value = "";
 }
 
-// 3. Notu tamamlananlar kısmına taşıyan fonksiyon
-function tamamla(eleman) {
-    var tamamlananlar = document.getElementById("tamamlanan-notlar");
-    var notSatiri = eleman.parentElement;
-
-    if (eleman.checked) {
-        tamamlananlar.appendChild(notSatiri);
-        notSatiri.style.textDecoration = "line-through";
-        notSatiri.style.color = "gray";
-    } else {
-        document.getElementById("kayitli-notlar").appendChild(notSatiri);
-        notSatiri.style.textDecoration = "none";
-        notSatiri.style.color = "black";
-    }
-}
-
+// 3. Notu tamamlananlar kısmına taşıyan fonksiyon (Buradan aşağısı aynı kalsın)
