@@ -4,49 +4,41 @@ function sayfaAc(sayfaId) {
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = "none";
     }
-    var secilenSayfa = document.getElementById(sayfaId);
-    if (secilenSayfa) {
-        secilenSayfa.style.display = "block";
-    }
+    document.getElementById(sayfaId).style.display = "block";
 }
 
 // 2. Not ekleme fonksiyonu
 function notEkle() {
-    var notAlani = document.getElementById("not-alani");
-    var liste = document.getElementById("kayitli-notlar");
-    
-    if (!notAlani || !liste || notAlani.value.trim() === "") {
-        return;
-    }
+    var notMetni = document.getElementById("not-alani").value;
+    if (notMetni === "") return;
 
+    var liste = document.getElementById("kayitli-notlar");
     var yeniNot = document.createElement("div");
     yeniNot.style.marginBottom = "10px";
     yeniNot.style.fontSize = "18px";
-    yeniNot.style.display = "flex";
-    yeniNot.style.alignItems = "center";
 
     yeniNot.innerHTML = `
         <input type="checkbox" onclick="tamamla(this)" style="transform: scale(1.5); margin-right: 10px;">
-        <span>${notAlani.value}</span>
+        <span>${notMetni}</span>
     `;
 
     liste.appendChild(yeniNot);
-    notAlani.value = ""; // Kutuyu temizle
+    document.getElementById("not-alani").value = "";
 }
 
 // 3. Notu tamamlananlar kısmına taşıyan fonksiyon
 function tamamla(eleman) {
-    var kayitliListe = document.getElementById("kayitli-notlar");
-    var tamamlananListe = document.getElementById("tamamlanan-notlar");
+    var tamamlananlar = document.getElementById("tamamlanan-notlar");
     var notSatiri = eleman.parentElement;
 
     if (eleman.checked) {
-        tamamlananListe.appendChild(notSatiri);
+        tamamlananlar.appendChild(notSatiri);
         notSatiri.style.textDecoration = "line-through";
         notSatiri.style.color = "gray";
     } else {
-        kayitliListe.appendChild(notSatiri);
+        document.getElementById("kayitli-notlar").appendChild(notSatiri);
         notSatiri.style.textDecoration = "none";
         notSatiri.style.color = "black";
     }
 }
+
