@@ -4,29 +4,52 @@ function sayfaAc(sayfaId) {
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = "none";
     }
-    document.getElementById(sayfaId).style.display = "block";
+    var secilenSayfa = document.getElementById(sayfaId);
+    if (secilenSayfa) {
+        secilenSayfa.style.display = "block";
+    }
 }
 
 // 2. Not ekleme fonksiyonu
 function notEkle() {
-    // BURAYA EKLEDİK: Test için uyarı kutusu
-    alert("Butona basıldı, fonksiyon çalışıyor!"); 
-
-    var notMetni = document.getElementById("not-alani").value;
-    if (notMetni === "") return;
-
+    var notAlani = document.getElementById("not-alani");
     var liste = document.getElementById("kayitli-notlar");
+    
+    // Eğer kutu boşsa veya hedef liste bulunamadıysa işlem yapma
+    if (!notAlani || !liste || notAlani.value.trim() === "") {
+        return;
+    }
+
     var yeniNot = document.createElement("div");
     yeniNot.style.marginBottom = "10px";
     yeniNot.style.fontSize = "18px";
+    yeniNot.style.display = "flex";
+    yeniNot.style.alignItems = "center";
 
+    // Notun içeriği ve onay kutusu
     yeniNot.innerHTML = `
         <input type="checkbox" onclick="tamamla(this)" style="transform: scale(1.5); margin-right: 10px;">
-        <span>${notMetni}</span>
+        <span>${notAlani.value}</span>
     `;
 
+    // Notu listeye ekle ve yazı alanını temizle
     liste.appendChild(yeniNot);
-    document.getElementById("not-alani").value = "";
+    notAlani.value = "";
 }
 
-// 3. Notu tamamlananlar kısmına taşıyan fonksiyon (Buradan aşağısı aynı kalsın)
+// 3. Notu tamamlananlar kısmına taşıyan fonksiyon
+function tamamla(eleman) {
+    var kayitliListe = document.getElementById("kayitli-notlar");
+    var tamamlananListe = document.getElementById("tamamlanan-notlar");
+    var notSatiri = eleman.parentElement;
+
+    if (eleman.checked) {
+        tamamlananListe.appendChild(notSatiri);
+        notSatiri.style.textDecoration = "line-through";
+        notSatiri.style.color = "gray";
+    } else {
+        kayitliListe.appendChild(notSatiri);
+        notSatiri.style.textDecoration = "none";
+        notSatiri.style.color = "black";
+    }
+}
