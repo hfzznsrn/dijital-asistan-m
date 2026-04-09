@@ -1,3 +1,4 @@
+// 1. Sayfalar arası geçişi sağlayan fonksiyon
 function sayfaAc(sayfaId) {
     var sayfalar = document.getElementsByClassName("sayfa-icerik");
     for (var i = 0; i < sayfalar.length; i++) {
@@ -6,6 +7,7 @@ function sayfaAc(sayfaId) {
     document.getElementById(sayfaId).style.display = "block";
 }
 
+// 2. Not ekleme fonksiyonu
 function notEkle() {
     var notMetni = document.getElementById("not-alani").value;
     if (notMetni === "") return;
@@ -24,6 +26,7 @@ function notEkle() {
     document.getElementById("not-alani").value = "";
 }
 
+// 3. Notu tamamlananlar kısmına taşıyan fonksiyon
 function tamamla(eleman) {
     var tamamlananlar = document.getElementById("tamamlanan-notlar");
     var notSatiri = eleman.parentElement;
