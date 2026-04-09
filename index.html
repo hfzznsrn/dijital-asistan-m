@@ -21,14 +21,25 @@
         <div id="gunluk" class="sayfa-icerik">
             <h1>Günlük Notlarım</h1>
            <textarea id="not-alanı" 
-               style="width:100%; height:150px;" placeholder="Bugün Neler Yapacaksın?"></textarea>
+               style="width:100%; height:300px; font-size: 18px;
+               border-radius: 10px; padding: 15px;"
+               placeholder="Bugün Neler Yapacaksın?"></textarea>
             <br>
-            <button onclick="notEkle()">Notu Kaydet</button>
-                <div id="kayıtlı-notlar">
-                    <h3>Yapılcaklar Listesi</h3>
+            <button onclick="notEkle()"
+                stye="margin-top: 10px; paddng: 10px 20px; background-color: navy; color:white;
+                border:none;
+                borer-radius: 5px; cursor:
+                pointer;">Notu Kaydet</button>
+                <div id="yapılacaklar listesi"
+                     style="margin-top:30px;">
+                      <h3>Yapılcaklar Listesi</h3>
+                        <div id="kayıtlı-notlar">
+                        </div>
                 </div>
-                <div id="tamamlananlar">
-                    <h3>Tamamlananlar </h3>
+            <div id=tamamlananlar"
+                style="margin-top:30px; opacity:0.7;">
+                <h3>Tamamlananlar </h3>
+                <div id="tamamlanan-notlar"></div>
               </div>
         </div>
             <div id="haftalik" 
