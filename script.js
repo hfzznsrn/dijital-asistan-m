@@ -55,3 +55,21 @@ function tamamla(eleman) {
         notSatiri.style.color = "black";
     }
 }
+// script.js dosyasının en sonuna ekle:
+function aylikPlaniHazirla() {
+    const takvim = document.getElementById("takvim-kutusu");
+    if (!takvim) return;
+
+    takvim.innerHTML = ""; // İçini her açılışta temizle
+
+    for (let i = 1; i <= 30; i++) {
+        let kutu = document.createElement("div");
+        kutu.style = "border: 2px solid navy; border-radius: 10px; padding: 10px; min-height: 80px; background: white;";
+        
+        kutu.innerHTML = `
+            <span style="font-weight: bold; color: navy;">${i}</span>
+            <textarea style="width: 100%; border: none; resize: none; outline: none; margin-top: 5px;" placeholder="Not..."></textarea>
+        `;
+        takvim.appendChild(kutu);
+    }
+}
