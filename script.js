@@ -29,8 +29,7 @@ function notEkle() {
     // Notun içeriği ve onay kutusu
     yeniNot.innerHTML = `
         <input type="checkbox" onclick="tamamla(this)" style="transform: scale(1.5); margin-right: 10px;">
-        <span style="flex-grow: 1;">$
-        {notAlani.value}</span>
+        <span style="flex-grow: 1;">${notAlani.value}</span>
         <button onclick="this.parentElement.remove()"
         style="background: none border: none; color: red; cursor:pointer; font-weight: bold;margin-left: 10px;">X</button>
         `;
