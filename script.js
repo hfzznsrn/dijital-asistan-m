@@ -1,24 +1,27 @@
-// 1. Sayfalar arası geçişi sağlayan fonksiyon
+// 1. Sayfalar arası geçişi sağlayan ana fonksiyon
 function sayfaAc(sayfaId) {
     var sayfalar = document.getElementsByClassName("sayfa-icerik");
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = "none";
     }
+
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
         secilenSayfa.style.display = "block";
+        
+        // Eğer aylık butonuna basıldıysa kutuları oluştur
+        if (sayfaId === 'aylik') {
+            aylikPlaniHazirla();
+        }
     }
 }
 
-// 2. Not ekleme fonksiyonu
+// 2. Günlük Not Ekleme Fonksiyonu
 function notEkle() {
     var notAlani = document.getElementById("not-alani");
     var liste = document.getElementById("kayitli-notlar");
-    
-    // Eğer kutu boşsa veya hedef liste bulunamadıysa işlem yapma
-    if (!notAlani || !liste || notAlani.value.trim() === "") {
-        return;
-    }
+
+    if (!notAlani || !liste || notAlani.value.trim() === "") return;
 
     var yeniNot = document.createElement("div");
     yeniNot.style.marginBottom = "10px";
@@ -26,15 +29,13 @@ function notEkle() {
     yeniNot.style.display = "flex";
     yeniNot.style.alignItems = "center";
 
-    // Notun içeriği ve onay kutusu
+    // Notun içeriği, checkbox ve silme butonu
     yeniNot.innerHTML = `
         <input type="checkbox" onclick="tamamla(this)" style="transform: scale(1.5); margin-right: 10px;">
         <span style="flex-grow: 1;">${notAlani.value}</span>
-        <button onclick="this.parentElement.remove()"
-        style="background: none border: none; color: red; cursor:pointer; font-weight: bold;margin-left: 10px;">X</button>
-        `;
+        <button onclick="this.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-weight:bold; margin-left:10px;">X</button>
+    `;
 
-    // Notu listeye ekle ve yazı alanını temizle
     liste.appendChild(yeniNot);
     notAlani.value = "";
 }
@@ -56,33 +57,25 @@ function tamamla(eleman) {
     }
 }
 
-    }
-}
+// 4. Aylık Planlayıcı Kutularını Oluşturan Fonksiyon
 function aylikPlaniHazirla() {
     const takvim = document.getElementById("takvim-kutusu");
     if (!takvim) return;
 
-    takvim.innerHTML = ""; // İçini her seferinde temizle ki üst üste binmesin
+    takvim.innerHTML = ""; // İçini temizle
 
-    // 1'den 30'a kadar döngü kuruyoruz
     for (let i = 1; i <= 30; i++) {
         let kutu = document.createElement("div");
-        
-        // Kutuların görünüşü (Navy çerçeve ve beyaz arka plan)
         kutu.style.border = "2px solid navy";
         kutu.style.borderRadius = "10px";
         kutu.style.padding = "10px";
         kutu.style.minHeight = "80px";
         kutu.style.backgroundColor = "white";
-        kutu.style.display = "flex";
-        kutu.style.flexDirection = "column";
-
-        // İçine gün numarasını (i) ve not alanını yerleştiriyoruz
+        
         kutu.innerHTML = `
-            <span style="font-weight: bold; color: navy; font-size: 16px;">${i}</span>
+            <span style="font-weight: bold; color: navy;">${i}</span>
             <textarea style="width: 100%; border: none; resize: none; outline: none; margin-top: 5px; background: transparent;" placeholder="Not al..."></textarea>
         `;
-        
         takvim.appendChild(kutu);
     }
 }
