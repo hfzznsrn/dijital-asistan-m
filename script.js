@@ -22,20 +22,18 @@ function sayfaAc(sayfaId) {
 }
 
 
-// 3. Günlük Not Ekleme
 function notEkle() {
     var notAlani = document.getElementById("not-alani");
     var liste = document.getElementById("kayitli-notlar");
 
-    if (!notAlani || !liste || notAlani.value.trim() === "") return;
+    if (!notAlani || notAlani.value.trim() === "") return;
 
     var yeniNot = document.createElement("div");
     yeniNot.style = "margin-bottom: 10px; display: flex; align-items: center; background: white; padding: 10px; border-radius: 8px; border: 1px solid #ccc;";
     
-    // Yapılacaklarda çarpı yok, sadece checkbox var
     yeniNot.innerHTML = `
-        <input type="checkbox" onchange="tamamla(this)" style="transform: scale(1.5); margin-right: 10px; cursor: pointer;">
-        <span style="flex-grow: 1; font-size: 18px;">${notAlani.value}</span>
+        <input type="checkbox" onchange="tamamla(this)" style="margin-right: 10px; width: 20px; height: 20px;">
+        <span style="flex-grow: 1;">${notAlani.value}</span>
         <span class="silme-alani"></span>
     `;
 
@@ -43,27 +41,24 @@ function notEkle() {
     notAlani.value = "";
 }
 
-// 4. Notu Tamamlananlara Taşıma ve Çarpı Ekleme
 function tamamla(eleman) {
-    var kayitliListe = document.getElementById("kayitli-notlar");
     var tamamlananListe = document.getElementById("tamamlanan-notlar");
+    var kayitliListe = document.getElementById("kayitli-notlar");
     var notSatiri = eleman.parentElement;
     var silmeAlani = notSatiri.querySelector(".silme-alani");
 
     if (eleman.checked) {
-        // Tamamlananlara taşı ve ÇARPI butonunu ekle
         notSatiri.style.textDecoration = "line-through";
-        notSatiri.style.color = "gray";
+        // TİK ATILINCA KIRMIZI ÇARPI GELSİN:
         silmeAlani.innerHTML = `<button onclick="this.parentElement.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-size: 20px; font-weight:bold; margin-left:10px;">×</button>`;
         tamamlananListe.appendChild(notSatiri);
     } else {
-        // Geri alırsan çarpıyı kaldır ve yapılacaklara taşı
         notSatiri.style.textDecoration = "none";
-        notSatiri.style.color = "black";
-        silmeAlani.innerHTML = "";
+        silmeAlani.innerHTML = ""; // Tik kalkarsa çarpı gitsin
         kayitliListe.appendChild(notSatiri);
     }
 }
+
 
 // 5. Toplantı Ekleme
 function toplantiEkle() {
