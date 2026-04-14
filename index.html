@@ -70,20 +70,31 @@
     </div>
 
 </div>
-    <div id="toplanti" class="sayfa-icerik" style="display:none; width: 100%; min-height: 80vh; display: flex; felx-direction: column; align-items: center; justify-content: flex-start; padding-top: 50px;">
-        <h1 style=color:red; font-size: 45px; margin-bottom: 20px; font-family: sans-serif;">TOPLANTILAR</h1>
-<div <div style="display: flex; flex-direction: column; align-items: center; gap: 15px; width:100%;">
-    <textarea id="toplanti-konu"
-        placeholder="Toplantı konusu" style"width: 500%; height:150px; font-size: 20px; border: 2px solid #333; border-radius: 20px; padding: 20px; box-sizing: border-box; resize: none;"></textarea>     
-    <div style="display: flex; flex-direction: column; align-items: center;">
-        <label style=" font-size: 14px; color: #555; margin-bottom: 5px; font-weight: bold;">Tarih ve Saat Ayarla</label> 
-    <input type="datetime-local"
-        id="toplanti-zaman" style="width: 350px; padding:15px; font-size: 18px; border: 2px solid #333 border-radius: 15px; text-align: center;"></div>
-    <button onclick="toplantiEkle()" style="width: 200px; padding: 15px; font-size: 22px; background-color: #f0f0f0; border:2px solid #333; border-radius: 12px; cursor: pointer; font-weight: bold; margin-top: 10px;">Ekle</button> 
-</div>
-<div id="toplanti-listesi" style=width: 500px; "margin-top: 30px;">
-    </div>
+    <div id="toplanti" class="sayfa-icerik" style="display:none; width: calc(100% - 20px); min-height: 80vh; margin: 0 auto; text-align: center; padding-top: 40px;">
+    
+    <h1 style="color: red; font-size: 50px; margin-bottom: 30px; font-weight: bold;">TOPLANTILAR</h1>
+
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;">
+        
+        <textarea id="toplanti-konu" placeholder="Toplantı konusunu buraya yazın..." 
+               style="width: 600px; height: 200px; font-size: 22px; border: 3px solid #333; border-radius: 20px; padding: 20px; box-sizing: border-box; resize: none; background-color: #fff; box-shadow: 4px 4px 10px rgba(0,0,0,0.1);"></textarea>
+
+        <div style="width: 100%;">
+            <p style="font-weight: bold; margin-bottom: 5px; font-size: 16px; color: #444;">Tarih ve Saat Ayarla</p>
+            <input type="datetime-local" id="toplanti-zaman" 
+                   style="width: 250px; padding: 12px; font-size: 16px; border: 2px solid #333; border-radius: 12px; text-align: center; background-color: #fff;">
         </div>
+
+        <button onclick="toplantiEkle()" 
+                style="width: 180px; padding: 15px; font-size: 22px; background-color: #fff; border: 3px solid #333; border-radius: 12px; cursor: pointer; font-weight: bold;">
+            Ekle
+        </button>
+
+    </div>
+
+    <div id="toplanti-listesi" style="width: 600px; margin: 30px auto; text-align: left;"></div>
+</div>
+
     
     <script src="script.js"></script>
 </body>
