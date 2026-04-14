@@ -112,6 +112,30 @@
 
     <div id="toplanti-listesi" style="margin-top: 30px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
 </div>
+       <div id="randevular" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
+    
+    <h1 style="color: navy; font-size: 45px; font-weight: bold; margin-bottom: 30px; font-family: sans-serif;">RANDEVULAR</h1>
+    
+    <div style="display: inline-block; width: 95%; max-width: 600px; text-align: left;">
+        
+        <p style="font-weight: bold; font-size: 18px; margin-bottom: 8px;">Ad Soyad</p>
+        <input type="text" id="randevu-isim" placeholder="Kişinin adını ve soyadını yazın..." style="width: 100%; padding: 12px; border-radius: 12px; border: 2px solid #333; font-size: 16px; margin-bottom: 20px; box-sizing: border-box;">
+        
+        <p style="font-weight: bold; font-size: 18px; margin-bottom: 8px;">Randevu Konusu</p>
+        <textarea id="randevu-konu" placeholder="Randevu detaylarını buraya yazın..." style="width: 100%; height: 100px; padding: 15px; border-radius: 15px; border: 2px solid #333; font-size: 16px; margin-bottom: 20px; resize: none; box-sizing: border-box;"></textarea>
+        
+        <p style="font-weight: bold; font-size: 16px; margin-bottom: 8px;">Tarih ve Saat Ayarla</p>
+        <input type="datetime-local" id="randevu-zaman" style="width: 60%; padding: 10px; border-radius: 10px; border: 2px solid #333; margin-bottom: 25px; font-size: 16px; box-sizing: border-box; display: block;">
+        
+        <div style="text-align: center;">
+            <button onclick="randevuKaydet()" style="background: navy; color: white; padding: 12px 50px; border: 2px solid #333; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 18px;">Ekle</button>
+        </div>
+
+    </div>
+
+    <div id="randevu-listesi" style="margin-top: 30px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
+</div>
+
 
   </div> <script src="script.js"></script>
 </body>
