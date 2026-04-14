@@ -1,24 +1,32 @@
-// 1. Sayfalar arası geçişi sağlayan ana fonksiyon
-window.onload=function() {
-    sayfaAc('gunluk');
+// 1. Sayfa yüklendiğinde notları açar
+window.onload = function() {
+    sayfaAc('gunluk'); 
+};
+
+// 2. Sayfa değiştirme fonksiyonu (Doğru parantez dizimi)
 function sayfaAc(sayfaId) {
-    var sayfalar = document.getElementsByClassName("sayfa-icerik");
+    // Önce bütün içerikleri gizle
+    var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
-        sayfalar[i].style.display = "none";
+        sayfalar[i].style.display = 'none';
     }
 
+    // Seçilen sayfayı göster
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-        secilenSayfa.style.display = "block";
-        if(sayfaId === 'toplanti')
-            }
-    secilenSayfa.style.display = 'flex';
-    secilenSayfa.style.flexDirection='column';
-    secilenSayfa.style.alignItems = 'center';
+        if (sayfaId === 'toplanti') {
+            // Toplantı sayfasıysa ortalayarak göster
+            secilenSayfa.style.display = 'flex';
+            secilenSayfa.style.flexDirection = 'column';
+            secilenSayfa.style.alignItems = 'center';
+        } else {
+            // Diğer sayfaları normal göster
+            secilenSayfa.style.display = 'block';
+        }
+    }
 }
-}
-        
-        // Eğer aylık butonuna basıldıysa kutuları oluştur
+
+// Eğer aylık butonuna basıldıysa kutuları oluştur
         if (sayfaId === 'aylik') {
             aylikPlaniHazirla();
         }
