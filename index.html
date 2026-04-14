@@ -93,27 +93,27 @@
             </div>
     </div>
 <div id="toplanti" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
-    <h1 style="color: #D32F2F; font-size: 45px; font-weight: bold; margin-bottom: 30px;">TOPLANTILAR</h1>
     
-    <div style="background: #f9f9f9; padding: 40px; border: 3px solid #333; border-radius: 30px; display: inline-block; width: 95%; max-width: 700px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+    <h1 style="color: #D32F2F; font-size: 45px; font-weight: bold; margin-bottom: 30px; font-family: sans-serif;">TOPLANTILAR</h1>
+    
+    <div style="display: inline-block; width: 95%; max-width: 600px; text-align: left;">
         
-        <p style="font-weight: bold; font-size: 18px; text-align: left; margin-bottom: 8px;">Toplantı Notlarınızı Buraya Giriniz</p>
-        <textarea id="toplanti-konu" placeholder="Notunuzu buraya yazın..." style="width: 100%; height: 180px; padding: 15px; border-radius: 20px; border: 3px solid #333; font-size: 18px; margin-bottom: 25px; resize: none; box-sizing: border-box;"></textarea>
+        <p style="font-weight: bold; font-size: 18px; margin-bottom: 10px;">Toplantı Notlarınızı Buraya Giriniz</p>
+        <textarea id="toplanti-konu" placeholder="Notunuzu buraya yazın..." style="width: 100%; height: 150px; padding: 15px; border-radius: 15px; border: 2px solid #333; font-size: 16px; margin-bottom: 20px; resize: none; box-sizing: border-box;"></textarea>
         
-        <p style="font-weight: bold; font-size: 16px; text-align: left; margin-bottom: 5px;">Tarih ve Saat Ayarla</p>
-        <input type="datetime-local" id="toplanti-zaman" style="width: 70%; padding: 10px; border-radius: 12px; border: 2px solid #333; margin-bottom: 30px; font-size: 16px; display: block;">
+        <p style="font-weight: bold; font-size: 16px; margin-bottom: 8px;">Tarih ve Saat Ayarla</p>
+        <input type="datetime-local" id="toplanti-zaman" style="width: 60%; padding: 10px; border-radius: 10px; border: 2px solid #333; margin-bottom: 25px; font-size: 16px; box-sizing: border-box; display: block;">
         
         <div style="text-align: center;">
             <button onclick="toplantiEkle()" style="background: #e0e0e0; color: black; padding: 10px 40px; border: 2px solid #333; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 16px;">Ekle</button>
         </div>
-        
+
     </div>
 
-    <div id="toplanti-listesi" style="margin-top: 40px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 20px;"></div>
+    <div id="toplanti-listesi" style="margin-top: 30px; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
 </div>
 
-
-    </div> <script src="script.js"></script>
+  </div> <script src="script.js"></script>
 </body>
 </html>
 
