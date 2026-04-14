@@ -65,3 +65,28 @@ function aylikPlaniHazirla() {
         takvim.appendChild(gunKutusu);
     }
 }
+function toplantiEkle() {
+    var konu = document.getElementById("toplanti-konu").value;
+    var zaman = document.getElementById("toplanti-zaman").value;
+    var liste = document.getElementById("toplanti-listesi");
+
+    if (konu === "" || zaman === "") {
+        alert("Lütfen alanları doldurun!");
+        return;
+    }
+
+    var yeniKutu = document.createElement("div");
+    yeniKutu.style = "background: white; border: 2px solid #333; border-radius: 15px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; width: 600px;";
+
+    yeniKutu.innerHTML = `
+        <div style="text-align: left;">
+            <strong style="font-size: 18px; color: navy;">${konu}</strong><br>
+            <span style="font-size: 14px; color: #666;">📅 ${zaman.replace("T", " ")}</span>
+        </div>
+        <input type="checkbox" onchange="this.parentElement.remove()" style="width: 25px; height: 25px; cursor: pointer;">
+    `;
+
+    liste.appendChild(yeniKutu);
+    document.getElementById("toplanti-konu").value = "";
+    document.getElementById("toplanti-zaman").value = "";
+}
