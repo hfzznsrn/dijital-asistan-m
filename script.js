@@ -104,7 +104,7 @@ function aylikPlaniHazirla() {
     
     // BURASI ÖNEMLİ: Sayfadaki "Nisan 2026" yazan başlığı bul ve değiştir
     // Eğer başlığın bir ID'si varsa onu kullanabilirsin, yoksa h2 olarak ararız
-    const baslik = document.querySelector("#aylik h2"); 
+    const baslik = document.querySelector("#aylik h1"); 
     if (baslik) {
         baslik.innerText = secilenAy + " " + secilenYil;
     }
