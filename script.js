@@ -137,10 +137,21 @@ function randevuKaydet() {
         return;
     }
 
-    var yeniRandevu = document.createElement("div");
-    yeniRandevu.style = "background: white; border: 2px solid navy; border-radius: 15px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 600px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);";
+   function randevuKaydet() {
+    var isim = document.getElementById("randevu-isim").value;
+    var konu = document.getElementById("randevu-konu").value;
+    var zaman = document.getElementById("randevu-zaman").value;
+    var liste = document.getElementById("randevu-listesi");
 
-    yeniRandevu.innerHTML = `
+    if (isim === "" || konu === "" || zaman === "") {
+        alert("Lütfen tüm alanları doldurun!");
+        return;
+    }
+
+    var yeniKutu = document.createElement("div");
+    yeniKutu.style = "background: white; border: 2px solid navy; border-radius: 15px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 600px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1);";
+
+    yeniKutu.innerHTML = `
         <div style="text-align: left;">
             <strong style="font-size: 18px; color: navy;">👤 ${isim}</strong><br>
             <span style="font-size: 16px; color: #333;">📝 ${konu}</span><br>
@@ -152,9 +163,9 @@ function randevuKaydet() {
         </div>
     `;
 
-    liste.appendChild(yeniRandevu); // Listeye ekle
+    liste.appendChild(yeniKutu);
 
-    // Giriş kutularını temizle
+    // Kutuları temizle
     document.getElementById("randevu-isim").value = "";
     document.getElementById("randevu-konu").value = "";
     document.getElementById("randevu-zaman").value = "";
@@ -163,16 +174,13 @@ function randevuKaydet() {
 function randevuTik(checkbox) {
     var silAlani = checkbox.parentElement.querySelector(".r-sil-alani");
     var kutu = checkbox.parentElement.parentElement;
-
     if (checkbox.checked) {
         kutu.style.opacity = "0.5";
         kutu.style.textDecoration = "line-through";
-        // Tik atılınca kırmızı ÇARPI butonu oluşsun
         silAlani.innerHTML = `<button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-size: 28px; font-weight:bold; margin-left:10px;">×</button>`;
     } else {
         kutu.style.opacity = "1";
         kutu.style.textDecoration = "none";
-        silAlani.innerHTML = ""; // Tik kalkarsa çarpı gitsin
+        silAlani.innerHTML = "";
     }
 }
-
