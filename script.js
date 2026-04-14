@@ -1,23 +1,20 @@
-window.onload = function() {
-    sayfaAc('gunluk'); // İlk açılışta günlüğü göster
-};
-
-function sayfaAc(sayfaId) {
+windofunction sayfaAc(sayfaId) {
     var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
-        sayfalar[i].style.display = 'none';
+        sayfalar[i].style.display = 'none'; // Diğer sayfaları gizle
     }
     
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-        if (sayfaId === 'toplanti') {
+        // Randevular sayfasını görünür yap ve ortala
+        if (sayfaId === 'randevular') {
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
         } else {
             secilenSayfa.style.display = 'block';
         }
-        if (sayfaId === 'aylik') { aylikPlaniHazirla(); }
+ if (sayfaId === 'aylik') { aylikPlaniHazirla(); }
     }
 }
 function notEkle() {
