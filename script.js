@@ -96,14 +96,35 @@ function toplantiTik(checkbox) {
     }
 }
 // 7. Aylık Planlayıcı
-function aylikPlaniHazirla() {
+functfunction aylikPlaniHazirla() {
     const takvim = document.getElementById("takvim-kutusu");
+    // HTML'e eklediğin seçim kutularından değerleri alıyoruz
+    const secilenAy = document.getElementById("ay-secimi").value;
+    const secilenYil = document.getElementById("yil-secimi").value;
+    
+    // Eğer sayfada "Nisan 2026" yazan bir başlık varsa onu da otomatik değiştirir
+    const baslik = document.querySelector("#aylik h2"); 
+    if (baslik) {
+        baslik.innerText = secilenAy + " " + secilenYil;
+    }
+
     if (!takvim) return;
-    takvim.innerHTML = ""; 
+    
+    takvim.innerHTML = ""; // Sayfayı temizle ki kutular üst üste binmesin
+    
+    // 30 tane kutuyu döngüyle oluşturuyoruz
     for (let i = 1; i <= 30; i++) {
         let kutu = document.createElement("div");
-        kutu.style = "border: 2px solid navy; border-radius: 10px; padding: 10px; min-height: 80px; background: white;";
-        kutu.innerHTML = `<strong>${i}</strong><textarea style="width:100%; border:none; resize:none; outline:none; font-size:12px;"></textarea>`;
+        kutu.style = "border: 2px solid navy; border-radius: 10px; padding: 10px; min-height: 80px; background: white; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);";
+        
+        kutu.innerHTML = `
+            <strong style="color: navy;">${i}</strong>
+            <textarea style="width:100%; border:none; resize:none; outline:none; font-size:12px; margin-top:5px;" 
+                      placeholder="${secilenAy} planını buraya yaz..."></textarea>
+        `;
         takvim.appendChild(kutu);
+    }
+}
+
     }
 }
