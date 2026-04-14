@@ -126,18 +126,7 @@ function aylikPlaniHazirla() {
         takvim.appendChild(kutu);
     }
 }
-function randevuKaydet() {
-    var isim = document.getElementById("randevu-isim").value;
-    var konu = document.getElementById("randevu-konu").value;
-    var zaman = document.getElementById("randevu-zaman").value;
-    var liste = document.getElementById("randevu-listesi");
-
-    if (isim === "" || konu === "" || zaman === "") {
-        alert("Lütfen tüm alanları doldurun!");
-        return;
-    }
-
-   function randevuKaydet() {
+ function randevuKaydet() {
     var isim = document.getElementById("randevu-isim").value;
     var konu = document.getElementById("randevu-konu").value;
     var zaman = document.getElementById("randevu-zaman").value;
