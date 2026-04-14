@@ -96,13 +96,14 @@ function toplantiTik(checkbox) {
     }
 }
 // 7. Aylık Planlayıcı
-functfunction aylikPlaniHazirla() {
+function aylikPlaniHazirla() {
     const takvim = document.getElementById("takvim-kutusu");
-    // HTML'e eklediğin seçim kutularından değerleri alıyoruz
+    // Seçim kutularından yeni değerleri al
     const secilenAy = document.getElementById("ay-secimi").value;
     const secilenYil = document.getElementById("yil-secimi").value;
     
-    // Eğer sayfada "Nisan 2026" yazan bir başlık varsa onu da otomatik değiştirir
+    // BURASI ÖNEMLİ: Sayfadaki "Nisan 2026" yazan başlığı bul ve değiştir
+    // Eğer başlığın bir ID'si varsa onu kullanabilirsin, yoksa h2 olarak ararız
     const baslik = document.querySelector("#aylik h2"); 
     if (baslik) {
         baslik.innerText = secilenAy + " " + secilenYil;
@@ -110,21 +111,13 @@ functfunction aylikPlaniHazirla() {
 
     if (!takvim) return;
     
-    takvim.innerHTML = ""; // Sayfayı temizle ki kutular üst üste binmesin
+    takvim.innerHTML = ""; // Kutuları temizle
     
-    // 30 tane kutuyu döngüyle oluşturuyoruz
+    // 30 kutuyu tekrar oluştur
     for (let i = 1; i <= 30; i++) {
         let kutu = document.createElement("div");
-        kutu.style = "border: 2px solid navy; border-radius: 10px; padding: 10px; min-height: 80px; background: white; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);";
-        
-        kutu.innerHTML = `
-            <strong style="color: navy;">${i}</strong>
-            <textarea style="width:100%; border:none; resize:none; outline:none; font-size:12px; margin-top:5px;" 
-                      placeholder="${secilenAy} planını buraya yaz..."></textarea>
-        `;
+        kutu.style = "border: 2px solid navy; border-radius: 10px; padding: 10px; min-height: 80px; background: white;";
+        kutu.innerHTML = `<strong>${i}</strong><textarea style="width:100%; border:none; resize:none; outline:none; font-size:12px;" placeholder="${secilenAy} planın..."></textarea>`;
         takvim.appendChild(kutu);
-    }
-}
-
     }
 }
