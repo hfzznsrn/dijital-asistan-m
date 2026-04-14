@@ -22,3 +22,30 @@ function sayfaAc(sayfaId) {
         }
     }
 }
+function notEkle() {
+    var notAlani = document.getElementById("not-alani");
+    var liste = document.getElementById("kayitli-notlar");
+
+    if (!notAlani || notAlani.value.trim() === "") return;
+
+    var yeniNot = document.createElement("div");
+    yeniNot.style = "margin-bottom: 10px; display: flex; align-items: center; background: white; padding: 10px; border-radius: 8px; border: 1px solid #ccc;";
+    
+    yeniNot.innerHTML = `
+        <input type="checkbox" onchange="notuTamamla(this)" style="margin-right: 10px; width: 20px; height: 20px;">
+        <span style="flex-grow: 1;">${notAlani.value}</span>
+    `;
+
+    liste.appendChild(yeniNot);
+    notAlani.value = "";
+}
+
+function notuTamamla(checkbox) {
+    var tamamlananlar = document.getElementById("tamamlanan-notlar");
+    if (checkbox.checked) {
+        var satir = checkbox.parentElement;
+        satir.style.textDecoration = "line-through";
+        satir.style.opacity = "0.5";
+        tamamlananlar.appendChild(satir);
+    }
+}
