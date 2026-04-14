@@ -20,8 +20,6 @@ function sayfaAc(sayfaId) {
         if (sayfaId === 'aylik') { aylikPlaniHazirla(); }
     }
 }
-
-
 function notEkle() {
     var notAlani = document.getElementById("not-alani");
     var liste = document.getElementById("kayitli-notlar");
@@ -58,16 +56,13 @@ function tamamla(eleman) {
         kayitliListe.appendChild(notSatiri);
     }
 }
-
-
-// 5. Toplantı Ekleme
 function toplantiEkle() {
     var konu = document.getElementById("toplanti-konu").value;
     var zaman = document.getElementById("toplanti-zaman").value;
     var liste = document.getElementById("toplanti-listesi");
 
-    if (konu === "" || zaman === "" || !liste) {
-        alert("Lütfen tüm alanları doldurun!");
+    if (konu === "" || zaman === "") {
+        alert("Lütfen alanları doldurun!");
         return;
     }
 
@@ -85,21 +80,21 @@ function toplantiEkle() {
         </div>
     `;
 
-    liste.appendChild(yeniKutu);
+    liste.appendChild(yeniKutu); // İşte bu satır alta ekler!
+    
     document.getElementById("toplanti-konu").value = "";
     document.getElementById("toplanti-zaman").value = "";
 }
 
-// 6. Toplantı Tik Atılınca Çarpı Çıkması
 function toplantiTik(checkbox) {
     var silAlani = checkbox.parentElement.querySelector(".t-sil-alani");
     if (checkbox.checked) {
+        // TİK ATILINCA ÇARPI GELSİN
         silAlani.innerHTML = `<button onclick="this.parentElement.parentElement.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-size: 28px; font-weight:bold; margin-left:10px;">×</button>`;
     } else {
         silAlani.innerHTML = "";
     }
 }
-
 // 7. Aylık Planlayıcı
 function aylikPlaniHazirla() {
     const takvim = document.getElementById("takvim-kutusu");
