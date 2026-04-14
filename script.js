@@ -49,3 +49,19 @@ function notuTamamla(checkbox) {
         tamamlananlar.appendChild(satir);
     }
 }
+function aylikPlaniHazirla() {
+    var takvim = document.getElementById("takvim-kutusu");
+    if (!takvim) return;
+    
+    takvim.innerHTML = ""; // Sayfayı her açtığında sıfırlar, üst üste binmez
+    for (let i = 1; i <= 30; i++) {
+        var gunKutusu = document.createElement("div");
+        gunKutusu.style = "border: 2px solid navy; border-radius: 10px; padding: 8px; min-height: 100px; background: white; display: flex; flex-direction: column;";
+        
+        gunKutusu.innerHTML = `
+            <span style="font-weight: bold; color: navy;">${i}</span>
+            <textarea style="width: 100%; height: 100%; border: none; resize: none; font-size: 12px; margin-top: 5px;" placeholder="Not al..."></textarea>
+        `;
+        takvim.appendChild(gunKutusu);
+    }
+}
