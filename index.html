@@ -70,16 +70,17 @@
     </div>
 
 </div>
-    <div id="toplanti" class="sayfa-icerik" style="display:none; padding:20px;">
-        <h1 style=color:red;">TOPLANTILAR</h1>
-<div style="margin-bottom:20px;">
+    <div id="toplanti" class="sayfa-icerik" style="display:none; padding-top: 50px; text-align: center;">
+        <h1 style=color:red; font-size: 40px; margin-bottom: 30px;">TOPLANTILAR</h1>
+<div <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
     <input type="text" id="toplanti-konu"
-        placeholder="Toplantı konusu" style"padding: 10px; width: 40%;">
+        placeholder="Toplantı konusu" style"width: 400%; height:100px; font-size: 22px; text-align: center; border: 2px solid #333; border-radius: 15px; padding: 10px;">
+    
     <input type="datetime-local"
-        id="toplanti-zaman" style="padding:10px;">
-    <button onclick="toplantiEkle()" style="background: navvy; color: white; border: none; padding: 10px 20px; cursor: pointer;">Ekle</button> 
+        id="toplanti-zaman" style="width: 300px; padding:15px; font-size: 18px; border: 2px solid #333 border-radius: 15px; text-align: center;">
+    <button onclick="toplantiEkle()" style="width: 150px; padding: 15px; font-size: 20px; background-color: white; border:2px solid #333; border-radius: 10px; cursor: pointer; font-weight:bold;">Ekle</button> 
 </div>
-<div id="toplanti-listesi">
+<div id="toplanti-listesi" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center;">
     </div>
         </div>
     
