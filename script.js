@@ -1,9 +1,7 @@
-// 1. Sayfa // 1. Sayfa yüklendiğinde notları açar
 window.onload = function() {
-    sayfaAc('gunluk');
+    sayfaAc('gunluk'); // İlk açılışta günlüğü göster
 };
 
-// 2. Sayfa değiştirme fonksiyonu
 function sayfaAc(sayfaId) {
     var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
@@ -19,12 +17,10 @@ function sayfaAc(sayfaId) {
         } else {
             secilenSayfa.style.display = 'block';
         }
-        
-        if (sayfaId === 'aylik') {
-            aylikPlaniHazirla();
-        }
+        if (sayfaId === 'aylik') { aylikPlaniHazirla(); }
     }
 }
+
 
 // 3. Günlük Not Ekleme
 function notEkle() {
