@@ -1,4 +1,6 @@
 // 1. Sayfalar arası geçişi sağlayan ana fonksiyon
+window.onload=function() {
+    sayfaAc('gunluk');
 function sayfaAc(sayfaId) {
     var sayfalar = document.getElementsByClassName("sayfa-icerik");
     for (var i = 0; i < sayfalar.length; i++) {
@@ -8,6 +10,13 @@ function sayfaAc(sayfaId) {
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
         secilenSayfa.style.display = "block";
+        if(sayfaId === 'toplanti')
+            }
+    secilenSayfa.style.display = 'flex';
+    secilenSayfa.style.flexDirection='column';
+    secilenSayfa.style.alignItems = 'center';
+}
+}
         
         // Eğer aylık butonuna basıldıysa kutuları oluştur
         if (sayfaId === 'aylik') {
@@ -78,4 +87,35 @@ function aylikPlaniHazirla() {
         `;
         takvim.appendChild(kutu);
     }
+}
+function toplantiEkle() {
+    var konu = document.getElementById("toplanti-konu").value;
+    var zaman = document.getElementById("toplanti-zaman").value;
+
+    if (konu === "" || zaman === "") {
+        alert("Lütfen tüm alanları doldurun!");
+        return;
+    }
+
+    var liste = document.getElementById("toplanti-listesi");
+    var yeniKutu = document.createElement("div");
+    
+    // Kutu Tasarımı (Beyaz, Siyah Çerçeveli)
+    yeniKutu.style = "background: white; border: 2px solid #333; border-radius: 15px; padding: 15px; margin-top: 15px; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 600px;";
+
+    // İçerik ve Tik Kutusu
+    yeniKutu.innerHTML = `
+        <div style="text-align: left;">
+            <strong style="font-size: 18px; color: navy;">${konu}</strong><br>
+            <span style="font-size: 14px; color: #666;">📅 ${zaman.replace("T", " ")}</span>
+        </div>
+        <input type="checkbox" onchange="this.parentElement.remove()" 
+               style="width: 25px; height: 25px; cursor: pointer; accent-color: green;">
+    `;
+
+    liste.appendChild(yeniKutu);
+
+    // Formu temizle
+    document.getElementById("toplanti-konu").value = "";
+    document.getElementById("toplanti-zaman").value = "";
 }
