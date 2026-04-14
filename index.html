@@ -93,15 +93,16 @@
             </div>
     </div>
 
-</div>
-       <div id="toplanti" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
+    <div id="toplanti" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
         <h1 style="color: navy;">Toplantı Kayıt</h1>
         <div style="background: #f0f0f0; padding: 20px; border-radius: 15px; display: inline-block; width: 100%; max-width: 500px;">
             <input type="text" id="toplanti-notu" placeholder="Toplantı notu yaz..." style="width: 80%; padding: 10px; border-radius: 8px; border: 1px solid #ccc;">
             <button onclick="toplantiEkle()" style="background: navy; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">Ekle</button>
         </div>
         <div id="toplanti-listesi" style="margin-top: 20px; width: 100%; display: flex; flex-direction: column; align-items: center;"></div>
-    </div> <div id="randevular" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
+    </div>
+
+    <div id="randevular" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
         <h1 style="color: navy; margin-bottom: 20px;">Randevu Kayıt Paneli</h1>
         <div style="background: #f4f4f9; padding: 25px; border-radius: 20px; display: inline-block; width: 100%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd;">
             <input type="text" id="randevu-isim" placeholder="Ad Soyad" style="width: 95%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ccc;">
@@ -110,6 +111,8 @@
             <button onclick="randevuKaydet()" style="background: navy; color: white; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%;">Randevuyu Kaydet</button>
         </div>
         <div id="randevu-listesi" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px;"></div>
-    </div> <script src="script.js"></script>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
