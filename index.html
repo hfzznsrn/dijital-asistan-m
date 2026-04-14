@@ -118,22 +118,23 @@
 
     <div id="toplanti-listesi" style="width: 600px; margin: 30px auto; text-align: left;"></div>
 </div>
-    <div id="randevular" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
-    <h1 style="color: navy;">Randevu Kayıt</h1>
+   <div id="randevular" class="sayfa-icerik" style="display:none; padding: 20px; text-align: center;">
+    <h1 style="color: navy; margin-bottom: 20px;">Randevu Kayıt Paneli</h1>
     
-    <div style="background: #f0f0f0; padding: 20px; border-radius: 15px; display: inline-block; width: 100%; max-width: 500px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-        <input type="text" id="randevu-isim" placeholder="İsim Soyisim" style="width: 90%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
-        <input type="text" id="randevu-konu" placeholder="Randevu Konusu" style="width: 90%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #ccc;">
-        <input type="datetime-local" id="randevu-zaman" style="width: 90%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #ccc;">
+    <div style="background: #f4f4f9; padding: 25px; border-radius: 20px; display: inline-block; width: 100%; max-width: 500px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd;">
+        <input type="text" id="randevu-isim" placeholder="Ad Soyad" style="width: 95%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px;">
         
-        <button onclick="randevuKaydet()" style="background: navy; color: white; padding: 10px 30px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; width: 95%;">Kaydet</button>
+        <input type="text" id="randevu-konu" placeholder="Randevu Konusu (Örn: Diş Randevusu)" style="width: 95%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px;">
+        
+        <label style="display: block; text-align: left; margin-left: 5%; margin-bottom: 5px; font-weight: bold; color: #555;">Randevu Tarihi ve Saati:</label>
+        <input type="datetime-local" id="randevu-zaman" style="width: 95%; padding: 12px; margin-bottom: 20px; border-radius: 10px; border: 1px solid #ccc; font-size: 16px;">
+        
+        <button onclick="randevuKaydet()" style="background: #000080; color: white; padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; font-size: 18px; transition: 0.3s;">Randevuyu Sisteme Kaydet</button>
     </div>
 
-    <div id="randevu-listesi" style="margin-top: 30px; display: flex; flex-direction: column; align-items: center;"></div>
-</div>
-
-
-    
+    <div id="randevu-listesi" style="margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+        </div>
+</div> 
     <script src="script.js"></script>
 </body>
 </html>
