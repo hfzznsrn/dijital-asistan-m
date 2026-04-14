@@ -69,7 +69,21 @@
             </div>
     </div>
 
-</div> <script src="script.js"></script>
+</div>
+    <div id="toplanti" class="sayfa-icerik" style="display:none; padding:20px;">
+        <h1 style=color:red;">TOPLANTILAR</h1>
+<div style="margin-bottom:20px;">
+    <input type="text" id="toplanti-konu"
+        placeholder="Toplantı konusu" style"padding: 10px; width: 40%;">
+    <input type="datetime-local"
+        id="toplanti-zaman" style="padding:10px;">
+    <button onclick="toplantiEkle()" style="background: navvy; color: white; border: none; padding: 10px 20px; cursor: pointer;">Ekle</button> 
+</div>
+<div id="toplanti-listesi">
+    </div>
+        </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
 
