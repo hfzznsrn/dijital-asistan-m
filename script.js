@@ -205,4 +205,18 @@ function notlariKaydet() {
     localStorage.setItem('notlarim', yapilacaklar);
     localStorage.setItem('tamamlananlarim', tamamlananlar);
 }
+function arsivle(eleman) {
+    var arsivListesi = document.getElementById('arsivlenmis-notlar');
+    // Notun satırını bulur
+    var notSatiri = eleman.parentElement.parentElement; 
+    
+    // Arşivde çarpı butonunu gizler
+    eleman.style.display = "none";
+    
+    // Notu arşive taşır
+    arsivListesi.appendChild(notSatiri);
+    
+    // Değişikliği hafızaya kaydeder
+    notlariKaydet();
+}
 
