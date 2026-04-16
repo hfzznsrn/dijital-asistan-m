@@ -57,6 +57,7 @@ function notEkle() {
 
     liste.appendChild(yeniNot);
     notAlani.value = "";
+    notlariKaydet();
 }
 
 function tamamla(eleman) {
@@ -70,10 +71,12 @@ function tamamla(eleman) {
         // TİK ATILINCA KIRMIZI ÇARPI GELSİN:
         silmeAlani.innerHTML = `<button onclick="this.parentElement.parentElement.remove()" style="background:none; border:none; color:red; cursor:pointer; font-size: 20px; font-weight:bold; margin-left:10px;">×</button>`;
         tamamlananListe.appendChild(notSatiri);
+        notlariKaydet();
     } else {
         notSatiri.style.textDecoration = "none";
         silmeAlani.innerHTML = ""; // Tik kalkarsa çarpı gitsin
         kayitliListe.appendChild(notSatiri);
+        notlariKaydet();
     }
 }
 function toplantiEkle() {
