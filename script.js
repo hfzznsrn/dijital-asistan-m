@@ -190,3 +190,12 @@ function randevuTik(checkbox) {
         silAlani.innerHTML = "";
     }
 }
+function notlariKaydet() {
+    // Yapılacaklar ve Tamamlananlar listelerinin o anki halini alıyoruz
+    var yapilacaklar = document.getElementById('kayitli-notlar').innerHTML;
+    var tamamlananlar = document.getElementById('tamamlanan-notlar').innerHTML;
+    
+    // Tarayıcıya "notlarim" ve "tamamlananlarim" isimleriyle kaydediyoruz
+    localStorage.setItem('notlarim', yapilacaklar);
+    localStorage.setItem('tamamlananlarim', tamamlananlar);
+}
