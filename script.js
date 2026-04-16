@@ -8,8 +8,9 @@ function sayfaAc(sayfaId) {
     // Seçilen sayfayı göster
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-        // Toplantı ve Randevu sayfaları için özel hizalama
-        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv'){
+      // script.js - Satır 12'yi bul ve bu satırla değiştir:
+if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
+
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
