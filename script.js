@@ -6,7 +6,7 @@ function sayfaAc(sayfaId) {
     
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-        if (sayfaId === 'toplanti' || sayfaId === 'randevu') || sayfaId === 'randevular'){
+        if (sayfaId === 'toplanti' || sayfaId === 'randevular'){
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
