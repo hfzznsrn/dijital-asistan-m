@@ -9,7 +9,7 @@ function sayfaAc(sayfaId) {
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
         // Toplantı ve Randevu sayfaları için özel hizalama
-        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'arsiv'){
+        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv'){
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
