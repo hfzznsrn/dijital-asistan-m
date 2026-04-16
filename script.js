@@ -1,30 +1,32 @@
 function sayfaAc(sayfaId) {
-    // 1. Önce bütün sayfaları gizle
+    // 1. Bütün içerikleri gizle
     var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = 'none';
     }
 
-    // 2. Tıklanan sayfayı bul
+    // 2. Seçilen sayfayı bul
     var secilenSayfa = document.getElementById(sayfaId);
-    
-    if (secilenSayfa) {
-        // 3. Ortalanması gereken sayfaları kontrol et
-        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
-            secilenSayfa.style.display = 'flex';
-            secilenSayfa.style.flexDirection = 'column';
-            secilenSayfa.style.alignItems = 'center';
-        } else {
-            // 4. Günlük notlar gibi sayfaları normal göster
-            secilenSayfa.style.display = 'block';
-        }
+    if (!secilenSayfa) return; // Sayfa yoksa dur
+
+    // 3. Arşiv, Toplantı ve Randevular için TAM ORTALAMA ayarı
+    if (sayfaId === 'arsiv' || sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu') {
+        secilenSayfa.style.display = 'flex';
+        secilenSayfa.style.flexDirection = 'column';
+        secilenSayfa.style.alignItems = 'center';
+        secilenSayfa.style.justifyContent = 'flex-start';
+        secilenSayfa.style.width = '100%'; 
+    } else {
+        // Günlük Notlar gibi sayfalar normal görünsün
+        secilenSayfa.style.display = 'block';
     }
 
-    // 5. Özel fonksiyonları tetikle (Aylık takvim gibi)
-    if (sayfaId === 'aylik' && typeof aylikPlaniHazirla === "function") {
+    // 4. Aylık takvim özel kontrolü
+    if (sayfaId === 'aylik' && typeof aylikPlaniHazirla === 'function') {
         aylikPlaniHazirla();
     }
 }
+
 
 
 window.onload = function() {
