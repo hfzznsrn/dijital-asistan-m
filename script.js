@@ -66,6 +66,7 @@ function tamamla(eleman) {
     var kayitliListe = document.getElementById("kayitli-notlar");
     var notSatiri = eleman.parentElement;
     var silmeAlani = notSatiri.querySelector(".silme-alani");
+    notlariKaydet();
 
     if (eleman.checked) {
         notSatiri.style.textDecoration = "line-through";
