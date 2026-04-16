@@ -5,24 +5,25 @@ function sayfaAc(sayfaId) {
         sayfalar[i].style.display = 'none';
     }
 
-    // Seçilen sayfayı göster
+    // Seçilen sayfayı bul
     var secilenSayfa = document.getElementById(sayfaId);
+    
     if (secilenSayfa) {
-   // Seçilen sayfayı göster
-if (secilenSayfa) {
-    if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
-
-
+        // Ortalanması gereken sayfalar (Arşiv dahil)
+        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
         } else {
+            // Diğer sayfalar (Günlük notlar vb.)
             secilenSayfa.style.display = 'block';
         }
+    }
 
-        // Aylık takvim kontrolü
-        if (sayfaId === 'aylik') { 
-            aylikPlaniHazirla(); 
+    // Aylık takvim kontrolü
+    if (sayfaId === 'aylik') {
+        if (typeof aylikPlaniHazirla === "function") {
+            aylikPlaniHazirla();
         }
     }
 }
