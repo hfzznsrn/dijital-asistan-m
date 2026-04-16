@@ -191,11 +191,12 @@ function randevuTik(checkbox) {
     }
 }
 function notlariKaydet() {
-    // Yapılacaklar ve Tamamlananlar listelerinin o anki halini alıyoruz
+    // Listelerin içindeki HTML yapısını alıyoruz
     var yapilacaklar = document.getElementById('kayitli-notlar').innerHTML;
     var tamamlananlar = document.getElementById('tamamlanan-notlar').innerHTML;
     
-    // Tarayıcıya "notlarim" ve "tamamlananlarim" isimleriyle kaydediyoruz
+    // Bunları tarayıcı hafızasına kaydediyoruz
     localStorage.setItem('notlarim', yapilacaklar);
     localStorage.setItem('tamamlananlarim', tamamlananlar);
 }
+
