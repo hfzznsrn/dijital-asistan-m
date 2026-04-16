@@ -24,10 +24,21 @@ function sayfaAc(sayfaId) {
     }
 }
 
-// Sayfa ilk açıldığında günlük notları göster
 window.onload = function() {
-    sayfaAc('gunluk');
+    sayfaAc('gunluk'); // Zaten sende olan satır
+
+    // Hafızadan notları geri getir
+    var eskiNotlar = localStorage.getItem('notlarim');
+    var eskiTamamlananlar = localStorage.getItem('tamamlananlarim');
+
+    if (eskiNotlar) {
+        document.getElementById('kayitli-notlar').innerHTML = eskiNotlar;
+    }
+    if (eskiTamamlananlar) {
+        document.getElementById('tamamlanan-notlar').innerHTML = eskiTamamlananlar;
+    }
 };
+
 
 function notEkle() {
     var notAlani = document.getElementById("not-alani");
