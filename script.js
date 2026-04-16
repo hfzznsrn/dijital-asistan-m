@@ -8,8 +8,10 @@ function sayfaAc(sayfaId) {
     // Seçilen sayfayı göster
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-      // script.js - Satır 12'yi bul ve bu satırla değiştir:
-if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
+   // Seçilen sayfayı göster
+if (secilenSayfa) {
+    if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
+
 
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
