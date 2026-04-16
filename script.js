@@ -1,26 +1,32 @@
 function sayfaAc(sayfaId) {
+    // Tüm sayfaları gizle
     var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = 'none';
     }
-    
+
+    // Seçilen sayfayı göster
     var secilenSayfa = document.getElementById(sayfaId);
     if (secilenSayfa) {
-        if (sayfaId === 'toplanti' || sayfaId === 'randevular'){
+        // Toplantı ve Randevu sayfaları için özel hizalama
+        if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu') {
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
         } else {
             secilenSayfa.style.display = 'block';
         }
-        
-        // Sorduğun aylık plan komutu burada, o yüzden eskisini siliyoruz:
-        if (sayfaId === 'aylik') { aylikPlaniHazirla(); }
+
+        // Aylık takvim kontrolü
+        if (sayfaId === 'aylik') { 
+            aylikPlaniHazirla(); 
+        }
     }
 }
 
+// Sayfa ilk açıldığında günlük notları göster
 window.onload = function() {
-    sayfaAc('gunluk'); 
+    sayfaAc('gunluk');
 };
 
 function notEkle() {
