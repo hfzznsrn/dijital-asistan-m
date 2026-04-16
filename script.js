@@ -1,32 +1,31 @@
 function sayfaAc(sayfaId) {
-    // Tüm sayfaları gizle
+    // 1. Önce bütün sayfaları gizle
     var sayfalar = document.getElementsByClassName('sayfa-icerik');
     for (var i = 0; i < sayfalar.length; i++) {
         sayfalar[i].style.display = 'none';
     }
 
-    // Seçilen sayfayı bul
+    // 2. Tıklanan sayfayı bul
     var secilenSayfa = document.getElementById(sayfaId);
     
     if (secilenSayfa) {
-        // Ortalanması gereken sayfalar (Arşiv dahil)
+        // 3. Ortalanması gereken sayfaları kontrol et
         if (sayfaId === 'toplanti' || sayfaId === 'randevular' || sayfaId === 'randevu' || sayfaId === 'arsiv') {
             secilenSayfa.style.display = 'flex';
             secilenSayfa.style.flexDirection = 'column';
             secilenSayfa.style.alignItems = 'center';
         } else {
-            // Diğer sayfalar (Günlük notlar vb.)
+            // 4. Günlük notlar gibi sayfaları normal göster
             secilenSayfa.style.display = 'block';
         }
     }
 
-    // Aylık takvim kontrolü
-    if (sayfaId === 'aylik') {
-        if (typeof aylikPlaniHazirla === "function") {
-            aylikPlaniHazirla();
-        }
+    // 5. Özel fonksiyonları tetikle (Aylık takvim gibi)
+    if (sayfaId === 'aylik' && typeof aylikPlaniHazirla === "function") {
+        aylikPlaniHazirla();
     }
 }
+
 
 window.onload = function() {
     // Hafızadan eski notları çağırıyoruz
