@@ -25,9 +25,7 @@ function sayfaAc(sayfaId) {
 }
 
 window.onload = function() {
-    sayfaAc('gunluk'); // Zaten sende olan satır
-
-    // Hafızadan notları geri getir
+    // Hafızadan eski notları çağırıyoruz
     var eskiNotlar = localStorage.getItem('notlarim');
     var eskiTamamlananlar = localStorage.getItem('tamamlananlarim');
 
@@ -37,7 +35,10 @@ window.onload = function() {
     if (eskiTamamlananlar) {
         document.getElementById('tamamlanan-notlar').innerHTML = eskiTamamlananlar;
     }
+
+    sayfaAc('gunluk'); // Sayfa açılınca günlük notları göster
 };
+
 
 
 function notEkle() {
